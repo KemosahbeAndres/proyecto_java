@@ -3,7 +3,6 @@ package stomas.andres;
 public class Item {
     private Producto producto;
     private int cantidad;
-    private int subtotal;
 
     private Item(){}
     public Item(Producto producto, int cantidad){
@@ -26,18 +25,10 @@ public class Item {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
-        setSubtotal(calcularSubtotal());
-    }
-
-    private int calcularSubtotal(){
-        return producto.getPrecio() * cantidad;
     }
 
     public int getSubtotal() {
-        return subtotal;
+        return producto.getPrecio() * cantidad;
     }
 
-    private void setSubtotal(int subtotal) {
-        this.subtotal = subtotal;
-    }
 }

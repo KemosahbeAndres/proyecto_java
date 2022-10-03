@@ -1,12 +1,12 @@
 package stomas.andres;
 
-public class Clientes {
+public class Cliente {
     public String nombre;
     private String run;
     public String direccion;
     public String mail;
 
-    public Clientes(String nombre, String run, String direccion, String mail) {
+    public Cliente(String nombre, String run, String direccion, String mail) {
         this.nombre = nombre;
         this.run = run;
         this.direccion = direccion;

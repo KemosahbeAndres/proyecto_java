@@ -31,22 +31,6 @@ public class Producto {
         this.precio = precio;
     }
 
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    public int getSubtotal() {
-        return subtotal;
-    }
-
-    public void setSubtotal(int subtotal) {
-        this.subtotal = subtotal;
-    }
-
     public String getDescripcion() {
         return descripcion;
     }
@@ -55,7 +39,8 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
-    public void imprirmir (){
-
+    @Override
+    public String toString (){
+        return "";
     }
 }
