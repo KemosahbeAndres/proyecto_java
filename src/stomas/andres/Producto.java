@@ -1,17 +1,13 @@
 package stomas.andres;
 
 public class Producto {
-    public String nombre;
-    public int precio;
-    public int cantidad;
-    public int subtotal;
-    public String descripcion;
+    private String nombre;
+    private int precio;
+    private String descripcion;
 
-    public Producto(String nombre, int precio, int cantidad, int subtotal, String descripcion) {
+    public Producto(String nombre, int precio, String descripcion) {
         this.nombre = nombre;
         this.precio = precio;
-        this.cantidad = cantidad;
-        this.subtotal = subtotal;
         this.descripcion = descripcion;
     }
 
@@ -20,7 +16,7 @@ public class Producto {
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.nombre = nombre.trim();
     }
 
     public int getPrecio() {
@@ -28,7 +24,7 @@ public class Producto {
     }
 
     public void setPrecio(int precio) {
-        this.precio = precio;
+        this.precio = precio>0 ? precio : 0;
     }
 
     public String getDescripcion() {
@@ -36,11 +32,11 @@ public class Producto {
     }
 
     public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+        this.descripcion = descripcion.trim();
     }
 
     @Override
     public String toString (){
-        return "";
+        return "| " +nombre + " | "+ String.format("$%,d", precio) + " | " + descripcion + " |\n";
     }
 }
