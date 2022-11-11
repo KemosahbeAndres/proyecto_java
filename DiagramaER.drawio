@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-11-11T01:04:59.565Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36" etag="e4Os7xjELsXeRt1sl-tX" version="20.4.0" type="github">
+<mxfile host="app.diagrams.net" modified="2022-11-11T01:05:26.300Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36" etag="OqGtKQhLIRpXXZGf5m0o" version="20.4.0" type="github">
   <diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">
     <mxGraphModel dx="868" dy="482" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
       <root>
@@ -20,7 +20,7 @@
           <mxGeometry x="416" y="170" width="37.5" height="50" as="geometry" />
         </mxCell>
         <mxCell id="k7mg1djWrPZgosc_BKo4-3" value="ADMINISTRADOR" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
-          <mxGeometry x="150" y="310" width="120" height="40" as="geometry" />
+          <mxGeometry x="190" y="310" width="120" height="40" as="geometry" />
         </mxCell>
         <mxCell id="k7mg1djWrPZgosc_BKo4-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=none;endFill=0;" edge="1" parent="1" source="k7mg1djWrPZgosc_BKo4-4" target="k7mg1djWrPZgosc_BKo4-11">
           <mxGeometry relative="1" as="geometry" />
@@ -41,13 +41,13 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="k7mg1djWrPZgosc_BKo4-9" value="PRODUCTO" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
-          <mxGeometry x="160" y="600" width="100" height="40" as="geometry" />
+          <mxGeometry x="200" y="600" width="100" height="40" as="geometry" />
         </mxCell>
         <mxCell id="k7mg1djWrPZgosc_BKo4-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;endArrow=none;endFill=0;" edge="1" parent="1" source="k7mg1djWrPZgosc_BKo4-10" target="k7mg1djWrPZgosc_BKo4-3">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="k7mg1djWrPZgosc_BKo4-10" value="INGRESA" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
-          <mxGeometry x="150" y="450" width="120" height="60" as="geometry" />
+          <mxGeometry x="190" y="450" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="k7mg1djWrPZgosc_BKo4-11" value="GENERA" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
           <mxGeometry x="570" y="450" width="120" height="60" as="geometry" />
@@ -65,7 +65,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="k7mg1djWrPZgosc_BKo4-13" value="TIENE" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
-          <mxGeometry x="365" y="670" width="120" height="60" as="geometry" />
+          <mxGeometry x="385" y="670" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
