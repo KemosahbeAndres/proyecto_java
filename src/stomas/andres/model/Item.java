@@ -1,4 +1,4 @@
-package stomas.andres;
+package stomas.andres.model;
 
 public class Item {
     private Producto producto;

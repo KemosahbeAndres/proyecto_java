@@ -1,7 +1,9 @@
 package stomas.andres.controller;
 
+import stomas.andres.model.Usuario;
+
 final public class LoginController {
-    public boolean execute(String user, String password){
-        return true;
+    public Usuario execute(String user, String password){
+        return Usuario.from();
     }
 }

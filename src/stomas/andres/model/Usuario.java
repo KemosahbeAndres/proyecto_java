@@ -1,18 +1,13 @@
-package stomas.andres;
+package stomas.andres.model;
 
-public class Cliente {
-    public String nombre;
-    private String run;
-    public String direccion;
-    public String mail;
-
-    public Cliente(String nombre, String run, String direccion, String mail) {
-        this.nombre = nombre;
-        this.run = run;
-        this.direccion = direccion;
-        this.mail = mail;
+public abstract class Usuario {
+    protected String nombre;
+    protected String run;
+    protected String direccion;
+    protected String mail;
+    public static Usuario from(){
+        return new Administrador();
     }
-
     public String getNombre() {
         return nombre;
     }
@@ -43,8 +38,5 @@ public class Cliente {
 
     public void setMail(String mail) {
         this.mail = mail;
-    }
-    public void imprimir(){
-
     }
 }

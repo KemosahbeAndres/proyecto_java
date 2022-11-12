@@ -1,4 +1,6 @@
-package stomas.andres;
+package stomas.andres.model;
+
+import stomas.andres.model.Producto;
 
 import java.util.ArrayList;
 import java.util.List;
