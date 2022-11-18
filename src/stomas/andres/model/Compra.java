@@ -3,9 +3,9 @@ package stomas.andres.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Orden {
+public class Compra {
     private List<Item> items;
-    public Orden(){
+    public Compra(){
         setItems(new ArrayList<Item>());
     }
 

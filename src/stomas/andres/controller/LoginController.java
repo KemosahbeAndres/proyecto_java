@@ -4,6 +4,6 @@ import stomas.andres.model.Usuario;
 
 final public class LoginController {
     public Usuario execute(String user, String password){
-        return Usuario.from();
+        return new Usuario();
     }
 }

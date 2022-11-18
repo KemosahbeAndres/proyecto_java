@@ -34,7 +34,7 @@ public class DBManager {
                     +" VALUES "
                     +"()";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, );
+
 
         }catch(Exception e){
             System.out.println("Error al insertar.");

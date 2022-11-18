@@ -1,42 +1,40 @@
 package stomas.andres.model;
 
-public abstract class Usuario {
-    protected String nombre;
-    protected String run;
-    protected String direccion;
-    protected String mail;
-    public static Usuario from(){
-        return new Administrador();
-    }
-    public String getNombre() {
-        return nombre;
+public class Usuario {
+    private int id;
+    private String usuario;
+    private String contraseña;
+    private int fecha;
+
+    public int getId() {
+        return id;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    private void setId(int id) {
+        this.id = id;
     }
 
-    public String getRun() {
-        return run;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setRun(String run) {
-        this.run = run;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
-    public String getDireccion() {
-        return direccion;
+    private String getContraseña() {
+        return contraseña;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    private void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
 
-    public String getMail() {
-        return mail;
+    public int getFecha() {
+        return fecha;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
+    private void setFecha(int fecha) {
+        this.fecha = fecha;
     }
 }

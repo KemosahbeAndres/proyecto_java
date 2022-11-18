@@ -1,7 +1,6 @@
 package stomas.andres;
 
 import stomas.andres.controller.LoginController;
-import stomas.andres.model.Administrador;
 import stomas.andres.model.Usuario;
 import stomas.andres.view.LoginView;
 
