@@ -11,7 +11,7 @@ public class App {
     private LoginView loginView;
     public App(){
         lcontroller = new LoginController();
-        loginView = new LoginView(this);
+        loginView = new LoginView();
         this.run();
     }
     public void run(){
@@ -21,7 +21,7 @@ public class App {
     public void tryLogin(String user, String pass){
         Usuario u = lcontroller.execute(user, pass);
         System.out.println(u.getClass());
-        if(u.getClass().getName().equals(Administrador.class.getName())){
+        if(u.getClass().getName() == ""){
             System.out.println("Es administrador");
         }else{
             System.out.println("Es cliente");

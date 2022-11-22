@@ -18,11 +18,11 @@ public class LoginView extends JFrame {
     private JTextField userField, passwordField;
     private JButton loginBtn, registerBtn;
     private Dimension dimension;
-    private App controller;
+    //private App controller;
     private static final Font tFont = new Font("Dialog", Font.BOLD, 20);
-    public LoginView(App parent){
+    public LoginView(){
         super("Iniciar sesion");
-        this.controller = parent;
+        //this.controller = parent;
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         setAlwaysOnTop(true);
@@ -43,7 +43,7 @@ public class LoginView extends JFrame {
 
         //mainpanel.add(top);
 
-        dimension = new Dimension(400,50);
+        dimension = new Dimension(300,50);
 
         JLabel title = new JLabel("Iniciar sesion", CENTER);
 
@@ -81,21 +81,22 @@ public class LoginView extends JFrame {
         loginBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.tryLogin(userField.getText(), passwordField.getText());
+                //controller.tryLogin(userField.getText(), passwordField.getText());
+                System.out.println("Intento de login");
             }
         });
-        registerBtn = new JButton("Salir");
+        registerBtn = new JButton("Registrar");
         registerBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.exit(0);
+                System.out.println("Intento de registrar");
             }
         });
 
 
-        actionpanel.add(registerBtn);
         actionpanel.add(loginBtn);
-        actionpanel.setBorder(new EmptyBorder(15,0,25,0));
+        actionpanel.add(registerBtn);
+        actionpanel.setBorder(new EmptyBorder(10,0,25,0));
 
         //mainpanel.add(actionpanel);
 
@@ -103,7 +104,7 @@ public class LoginView extends JFrame {
         add(actionpanel, BorderLayout.SOUTH);
 
         userField.requestFocus();
-        //setVisible(true);
+        setVisible(true);
         /*
         addComponentListener(new ComponentAdapter() {
             @Override
@@ -112,5 +113,9 @@ public class LoginView extends JFrame {
                 System.out.println("Width: "+e.getComponent().getWidth()+ " Height: " +e.getComponent().getHeight());
             }
         });*/
+    }
+
+    public static void main(String[] args) {
+        new LoginView();
     }
 }
