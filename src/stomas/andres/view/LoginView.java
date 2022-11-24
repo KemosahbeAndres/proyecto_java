@@ -18,11 +18,11 @@ public class LoginView extends JFrame {
     private JTextField userField, passwordField;
     private JButton loginBtn, registerBtn;
     private Dimension dimension;
-    //private App controller;
+    private LoginController controller;
     private static final Font tFont = new Font("Dialog", Font.BOLD, 20);
-    public LoginView(){
+    public LoginView(LoginController controller){
         super("Iniciar sesion");
-        //this.controller = parent;
+        this.controller = controller;
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         setAlwaysOnTop(true);
@@ -83,6 +83,8 @@ public class LoginView extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 //controller.tryLogin(userField.getText(), passwordField.getText());
                 System.out.println("Intento de login");
+                setVisible(false);
+                controller.execute();
             }
         });
         registerBtn = new JButton("Registrar");
@@ -104,7 +106,7 @@ public class LoginView extends JFrame {
         add(actionpanel, BorderLayout.SOUTH);
 
         userField.requestFocus();
-        setVisible(true);
+        //setVisible(true);
         /*
         addComponentListener(new ComponentAdapter() {
             @Override
@@ -115,7 +117,4 @@ public class LoginView extends JFrame {
         });*/
     }
 
-    public static void main(String[] args) {
-        new LoginView();
-    }
 }

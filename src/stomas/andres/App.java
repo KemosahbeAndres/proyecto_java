@@ -1,31 +1,28 @@
 package stomas.andres;
 
 import stomas.andres.controller.LoginController;
+import stomas.andres.controller.LogoutController;
 import stomas.andres.model.Usuario;
+import stomas.andres.view.HomeView;
 import stomas.andres.view.LoginView;
 
 import java.util.Scanner;
 
 public class App {
     private LoginController lcontroller;
+    private LogoutController locontroller;
     private LoginView loginView;
+    private HomeView homeView;
     public App(){
-        lcontroller = new LoginController();
-        loginView = new LoginView();
+        homeView = new HomeView();
+        lcontroller = new LoginController(homeView);
+        loginView = new LoginView(lcontroller);
+        locontroller = new LogoutController(loginView);
+        homeView.setController(locontroller);
         this.run();
     }
     public void run(){
         loginView.setVisible(true);
-    }
-
-    public void tryLogin(String user, String pass){
-        Usuario u = lcontroller.execute(user, pass);
-        System.out.println(u.getClass());
-        if(u.getClass().getName() == ""){
-            System.out.println("Es administrador");
-        }else{
-            System.out.println("Es cliente");
-        }
     }
 
     public static final Scanner sc = new Scanner(System.in);

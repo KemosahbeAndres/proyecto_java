@@ -2,8 +2,14 @@ package stomas.andres.controller;
 
 import stomas.andres.model.Usuario;
 
+import javax.swing.*;
+
 final public class LoginController {
-    public Usuario execute(String user, String password){
-        return new Usuario();
+    private JFrame home;
+    public LoginController(JFrame view){
+        home = view;
+    }
+    public void execute(){
+        home.setVisible(true);
     }
 }
