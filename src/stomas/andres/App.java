@@ -2,21 +2,26 @@ package stomas.andres;
 
 import stomas.andres.controller.LoginController;
 import stomas.andres.controller.LogoutController;
-import stomas.andres.model.Usuario;
+import stomas.andres.controller.RegisterController;
 import stomas.andres.view.HomeView;
 import stomas.andres.view.LoginView;
+import stomas.andres.view.RegisterView;
 
 import java.util.Scanner;
 
 public class App {
-    private LoginController lcontroller;
+    private LoginController lController;
     private LogoutController locontroller;
+    private RegisterController rController;
     private LoginView loginView;
     private HomeView homeView;
+    private RegisterView registerView;
     public App(){
         homeView = new HomeView();
-        lcontroller = new LoginController(homeView);
-        loginView = new LoginView(lcontroller);
+        rController = new RegisterController();
+        registerView = new RegisterView(rController);
+        lController = new LoginController(homeView);
+        loginView = new LoginView(lController, registerView);
         locontroller = new LogoutController(loginView);
         homeView.setController(locontroller);
         this.run();

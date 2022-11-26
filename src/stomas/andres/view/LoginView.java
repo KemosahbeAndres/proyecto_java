@@ -2,6 +2,7 @@ package stomas.andres.view;
 
 import stomas.andres.App;
 import stomas.andres.controller.LoginController;
+import stomas.andres.controller.RegisterController;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -10,7 +11,7 @@ import java.awt.event.*;
 
 import static javax.swing.SwingConstants.CENTER;
 
-public class LoginView extends JFrame {
+public class                                                                                                                   LoginView extends JFrame {
 
     public static boolean flag = false;
     private BoxLayout layout;
@@ -19,10 +20,13 @@ public class LoginView extends JFrame {
     private JButton loginBtn, registerBtn;
     private Dimension dimension;
     private LoginController controller;
+    private RegisterView rView;
+
     private static final Font tFont = new Font("Dialog", Font.BOLD, 20);
-    public LoginView(LoginController controller){
+    public LoginView(LoginController controller, RegisterView registerView){
         super("Iniciar sesion");
         this.controller = controller;
+        this.rView = registerView;
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         setAlwaysOnTop(true);
@@ -92,6 +96,8 @@ public class LoginView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Intento de registrar");
+                setAlwaysOnTop(false);
+                rView.setVisible(true);
             }
         });
 

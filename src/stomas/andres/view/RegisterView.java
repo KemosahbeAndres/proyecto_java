@@ -1,5 +1,8 @@
 package stomas.andres.view;
 
+import stomas.andres.controller.LoginController;
+import stomas.andres.controller.RegisterController;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -9,8 +12,12 @@ public class RegisterView extends JFrame {
     private JButton guardar_btn, cancelar_btn;
     private JPanel main_panel, user_panel, pass_panel, repeat_panel, action_panel;
     private JTextField user_tf, pass_tf, repeat_tf;
-    public RegisterView(){
+    private RegisterController rController;
+    public RegisterView(RegisterController controller){
         super("Registrar usuario");
+
+        rController = controller;
+
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setBounds(200, 200, 400, 300);
         setResizable(false);
@@ -62,6 +69,7 @@ public class RegisterView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Cancelando...");
+                setVisible(false);
             }
         });
         guardar_btn = new JButton("Guardar");
@@ -71,6 +79,7 @@ public class RegisterView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Guardando...");
+                setVisible(false);
             }
         });
         action_panel.add(cancelar_btn);
@@ -79,10 +88,8 @@ public class RegisterView extends JFrame {
         main_panel.add(action_panel);
 
         add(main_panel);
-        setVisible(true);
+        setAlwaysOnTop(true);
+        //setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new RegisterView();
-    }
 }
