@@ -3,6 +3,8 @@ package stomas.andres.view;
 import stomas.andres.controller.LogoutController;
 
 import javax.swing.*;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
@@ -12,8 +14,9 @@ public class HomeView extends JFrame {
     private LogoutController controller;
     public HomeView(){
         super("Bienvenido");
-        setBounds(200,200,600,400);
-        setDefaultCloseOperation(HIDE_ON_CLOSE);
+        setSize(600,400);
+        setLocationByPlatform(true);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -24,19 +27,25 @@ public class HomeView extends JFrame {
         });
 
         JMenuBar bar = new JMenuBar();
-        JMenu menu = new JMenu("Archivo");
-        JMenuItem item = new JMenuItem("Cerrar Sesion");
-        item.addActionListener(new AbstractAction() {
+        JMenu menu = new JMenu("Cerrar Sesion");
+        menu.addMenuListener(new MenuListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void menuSelected(MenuEvent e) {
                 System.out.println("Saliendo...");
                 setVisible(false);
                 controller.execute();
             }
+
+            @Override
+            public void menuDeselected(MenuEvent e) {
+
+            }
+
+            @Override
+            public void menuCanceled(MenuEvent e) {
+
+            }
         });
-        menu.add(new JMenuItem("Abrir"));
-        menu.addSeparator();
-        menu.add(item);
         bar.add(menu);
         add(bar, BorderLayout.NORTH);
         JPanel main = new JPanel();
@@ -52,8 +61,5 @@ public class HomeView extends JFrame {
         this.controller = controller;
     }
 
-    public static void main(String[] args) {
-        new HomeView();
-    }
 
 }

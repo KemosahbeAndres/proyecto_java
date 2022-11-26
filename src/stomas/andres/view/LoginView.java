@@ -22,15 +22,21 @@ public class                                                                    
     private LoginController controller;
     private RegisterView rView;
 
+    public void resetFields(){
+        userField.setText("");
+        passwordField.setText("");
+    }
     private static final Font tFont = new Font("Dialog", Font.BOLD, 20);
     public LoginView(LoginController controller, RegisterView registerView){
         super("Iniciar sesion");
         this.controller = controller;
         this.rView = registerView;
+        rView.setLoginView(this);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         setAlwaysOnTop(true);
-        setBounds(200,200,400,280);
+        setSize(400,280);
+        setLocationByPlatform(true);
 
         setLayout(new BorderLayout());
 
@@ -96,7 +102,7 @@ public class                                                                    
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Intento de registrar");
-                setAlwaysOnTop(false);
+                setVisible(false);
                 rView.setVisible(true);
             }
         });
