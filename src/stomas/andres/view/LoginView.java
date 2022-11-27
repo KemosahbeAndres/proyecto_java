@@ -21,17 +21,20 @@ public class                                                                    
     private Dimension dimension;
     private LoginController controller;
     private RegisterView rView;
+    private HomeView hView;
 
     public void resetFields(){
         userField.setText("");
         passwordField.setText("");
     }
     private static final Font tFont = new Font("Dialog", Font.BOLD, 20);
-    public LoginView(LoginController controller, RegisterView registerView){
+    public LoginView(LoginController controller, RegisterView registerView, HomeView homeView){
         super("Iniciar sesion");
         this.controller = controller;
         this.rView = registerView;
         rView.setLoginView(this);
+        this.hView = homeView;
+        hView.setLoginView(this);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         setAlwaysOnTop(true);
@@ -94,7 +97,7 @@ public class                                                                    
                 //controller.tryLogin(userField.getText(), passwordField.getText());
                 System.out.println("Intento de login");
                 setVisible(false);
-                controller.execute();
+                hView.setVisible(true);
             }
         });
         registerBtn = new JButton("Registrar");
