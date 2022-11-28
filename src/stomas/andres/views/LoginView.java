@@ -1,6 +1,7 @@
 package stomas.andres.views;
 
 import stomas.andres.controllers.LoginController;
+import stomas.andres.controllers.RegisterController;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -9,33 +10,32 @@ import java.awt.event.*;
 
 import static javax.swing.SwingConstants.CENTER;
 
-public class LoginView extends View {
+public class LoginView extends Dialog {
     private BoxLayout layout;
     private JPanel mainpanel, userpanel, passpanel, actionpanel;
     private JTextField userField, passwordField;
     private JButton loginBtn, registerBtn;
     private Dimension dimension;
     private LoginController controller;
-    private RegisterView rView;
-    private HomeView hView;
+    private RegisterView registerView;
 
     public void resetFields(){
         userField.setText("");
         passwordField.setText("");
     }
+    public boolean doLogin(){
+        return false;
+    }
     private static final Font tFont = new Font("Dialog", Font.BOLD, 20);
-    public LoginView(LoginController controller, RegisterView registerView, HomeView homeView){
-        super("Iniciar sesion");
+    public LoginView(Frame parent, LoginController controller, RegisterController registerController){
+        super(parent, "Iniciar sesion");
+        registerView = new RegisterView(parent, registerController);
         this.controller = controller;
-        this.rView = registerView;
-        rView.setLoginView(this);
-        this.hView = homeView;
-        hView.setLoginView(this);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         setResizable(false);
         setAlwaysOnTop(true);
         setSize(400,280);
-        setLocationByPlatform(true);
+        setLocationRelativeTo(null);
 
         setLayout(new BorderLayout());
 
@@ -92,8 +92,9 @@ public class LoginView extends View {
             public void actionPerformed(ActionEvent e) {
                 //controller.tryLogin(userField.getText(), passwordField.getText());
                 System.out.println("Intento de login");
+                ((HomeView) parent).showMain();
                 setVisible(false);
-                hView.setVisible(true);
+
             }
         });
         registerBtn = new JButton("Registrar");
@@ -101,8 +102,7 @@ public class LoginView extends View {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Intento de registrar");
-                setVisible(false);
-                rView.setVisible(true);
+                registerView.setVisible(true);
             }
         });
 
@@ -116,7 +116,6 @@ public class LoginView extends View {
         add(center, BorderLayout.CENTER);
         add(actionpanel, BorderLayout.SOUTH);
 
-        userField.requestFocus();
         //setVisible(true);
         /*
         addComponentListener(new ComponentAdapter() {
@@ -127,5 +126,6 @@ public class LoginView extends View {
             }
         });*/
     }
+
 
 }

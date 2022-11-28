@@ -8,23 +8,22 @@ import stomas.andres.views.LoginView;
 import stomas.andres.views.RegisterView;
 
 public class App {
-    private LoginController lController;
-    private RegisterController rController;
+
+    LoginController loginController;
+    private RegisterController registerController;
     private ListOrdersController loController;
-    private LoginView loginView;
     private HomeView homeView;
-    private RegisterView registerView;
     public App(){
+
+        registerController = new RegisterController();
+        loginController = new LoginController();
         loController = new ListOrdersController();
-        homeView = new HomeView(loController);
-        rController = new RegisterController();
-        registerView = new RegisterView(rController);
-        lController = new LoginController();
-        loginView = new LoginView(lController, registerView, homeView);
+
+        homeView = new HomeView(loController, loginController, registerController);
         this.run();
     }
     public void run(){
-        loginView.setVisible(true);
+        homeView.setVisible(true);
     }
 
     public static void main(String[] args) {

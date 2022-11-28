@@ -11,7 +11,7 @@ public abstract class Dialog extends JDialog {
         this(null, title);
     }
     public Dialog(Frame parent, String title){
-        super(parent, title);
+        super(parent, title, true);
     }
 
 }

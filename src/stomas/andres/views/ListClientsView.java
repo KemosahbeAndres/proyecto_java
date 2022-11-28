@@ -3,6 +3,7 @@ package stomas.andres.views;
 import stomas.andres.controllers.ListClientsController;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
 
@@ -17,7 +18,7 @@ public class ListClientsView extends Dialog {
         super(parent, "Clientes");
         controller = scController;
         setSize(500, 300);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
         String[][] data = {
@@ -31,6 +32,7 @@ public class ListClientsView extends Dialog {
         table.setEnabled(false);
 
         scPanel = new JScrollPane(table);
+        scPanel.setBorder(new EmptyBorder(10,10,10,10));
 
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
