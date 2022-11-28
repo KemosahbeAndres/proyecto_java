@@ -92,7 +92,7 @@ public class LoginView extends Dialog {
             public void actionPerformed(ActionEvent e) {
                 //controller.tryLogin(userField.getText(), passwordField.getText());
                 System.out.println("Intento de login");
-                ((HomeView) parent).showMain();
+                ((HomeView) parent).renderContent();
                 setVisible(false);
 
             }

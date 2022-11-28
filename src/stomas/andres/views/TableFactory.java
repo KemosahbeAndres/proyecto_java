@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Vector;
 
 final public class TableFactory {
-    public static JTable buildTable(String[] nombreCols, String[][] dataRows){
+    private static JTable buildDefaultTable(String[] nombreCols, String[][] dataRows){
         JTable table = new JTable();
         Vector<String> columnas = new Vector<>(Arrays.asList(nombreCols));
         Vector<Vector<Object>> filas = new Vector<>();
@@ -26,13 +26,13 @@ final public class TableFactory {
             @Override
             public Class<?> getColumnClass(int columnIndex) {
                 return String.class;
-                //switch (columnIndex){
-
-                //}
             }
         };
         table.setModel(model);
         return table;
+    }
+    public static JTable buildTable(String[] nombreCols, String[][] dataRows){
+        return buildDefaultTable(nombreCols, dataRows);
     }
 
     public static JTextField buildFilter(JTable tabla){
