@@ -1,29 +1,26 @@
 package stomas.andres.views;
 
-import stomas.andres.controllers.ListClientsController;
-import stomas.andres.controllers.ListOrdersController;
-import stomas.andres.controllers.LoginController;
-import stomas.andres.controllers.RegisterController;
+import stomas.andres.controllers.*;
 import stomas.andres.views.tablas.OrderTable;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 public class HomeView extends JFrame {
     private LoginView loginView;
     private ListClientsView listClientsView;
+    private NewClientView newClientView;
     private LoginController loginController;
     private RegisterController registerController;
     private ListOrdersController controller;
     private JMenuBar mainBar;
-    private JMenu mClientes, mProductos, mOrdenes;
-    private JMenuItem iAddClient, iListClients, iAddProduct, iListProducts, iAddOrder;
+    private JMenu mClientes, mProductos, mOrdenes, mUsuarios;
+    private JMenuItem iAddClient, iListClients, iAddProduct, iListProducts, iAddOrder, iAddUser;
     public HomeView(ListOrdersController loController, LoginController loginController, RegisterController registerController){
         super("Bienvenido");
         this.loginController = loginController;
@@ -31,7 +28,9 @@ public class HomeView extends JFrame {
         loginView = new LoginView(this, loginController, registerController);
         controller = loController;
         listClientsView = new ListClientsView(this, new ListClientsController());
-        setSize(600,400);
+        newClientView = new NewClientView(this, new NewClientController());
+        setSize(600,300);
+        setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -39,6 +38,12 @@ public class HomeView extends JFrame {
 
         mClientes = new JMenu("Clientes");
         iAddClient = new JMenuItem("Agregar Cliente");
+        iAddClient.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                newClientView.setVisible(true);
+            }
+        });
         iListClients = new JMenuItem("Listar Clientes");
         iListClients.addActionListener(new AbstractAction() {
             @Override
@@ -62,9 +67,16 @@ public class HomeView extends JFrame {
 
         mOrdenes.add(iAddOrder);
 
+        mUsuarios = new JMenu("Usuarios");
+        iAddUser = new JMenuItem("Agregar Usuario");
+
+        mUsuarios.add(iAddUser);
+
         mainBar.add(mClientes);
         mainBar.add(mProductos);
         mainBar.add(mOrdenes);
+        mainBar.add(mUsuarios);
+
         add(mainBar, BorderLayout.NORTH);
 
         if(loginView.doLogin()){
@@ -78,6 +90,7 @@ public class HomeView extends JFrame {
     public void renderContent(){
         JPanel main = new JPanel();
         main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
+        main.setBorder(new EmptyBorder(10,10,10,10));
         OrderTable ordenes = new OrderTable();
 
         List<List<Object>> compras = new ArrayList<List<Object>>();
@@ -86,7 +99,7 @@ public class HomeView extends JFrame {
 
         ordenes.inserData(compras);
         System.out.println(ordenes.getColumnCount());
-        main.add(new JLabel("HOME"));
+        main.add(new JLabel("Lista de Compras:", SwingConstants.LEFT));
         main.add(ordenes.getScrollTable());
         add(main, BorderLayout.CENTER);
     }

@@ -3,6 +3,7 @@ package stomas.andres.views.tablas;
 import stomas.andres.views.DocumentAdapter;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -16,9 +17,9 @@ public abstract class DefaultTable extends JTable {
     public DefaultTable(){
         columnas = new Vector<>();
         setCellSelectionEnabled(false);
-
         setColumnSelectionAllowed(false);
         setRowSelectionAllowed(true);
+
     }
 
     public DefaultTable(String[] columns){
@@ -51,8 +52,6 @@ public abstract class DefaultTable extends JTable {
                 }
             };
             setModel(model);
-            System.out.println("Modelo insertado");
-            System.out.println(columnas);
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
@@ -89,6 +88,8 @@ public abstract class DefaultTable extends JTable {
         return textField;
     }
     public JScrollPane getScrollTable(){
-        return new JScrollPane(this);
+        JScrollPane scroll = new JScrollPane(this);
+        scroll.setBorder(new EmptyBorder(10,10,10,10));
+        return scroll;
     }
 }

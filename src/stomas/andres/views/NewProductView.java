@@ -1,4 +1,4 @@
 package stomas.andres.views;
 
-public class AddClientView {
+public class NewProductView {
 }

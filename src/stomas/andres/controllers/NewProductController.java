@@ -1,4 +1,4 @@
 package stomas.andres.controllers;
 
-public class AddClientController {
+public class NewProductController {
 }
