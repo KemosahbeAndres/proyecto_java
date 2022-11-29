@@ -1,14 +1,16 @@
 package stomas.andres.entitys;
 
+import java.sql.Timestamp;
 import java.util.Vector;
 
 public class Cliente implements Vectorizable{
     private int id, telefono;
     private String nombre, run, direccion;
-    private int fecha;
-    public Cliente(int id, String nombre, String direccion, String run, int fecha) {
+    private Timestamp fecha;
+    public Cliente(int id, String nombre, int telefono, String direccion, String run, Timestamp fecha) {
         setId(id);
         setNombre(nombre);
+        setTelefono(telefono);
         setDireccion(direccion);
         setRun(run);
         setFecha(fecha);
@@ -17,9 +19,10 @@ public class Cliente implements Vectorizable{
         this(
                 (int) object.get(0),
                 (String) object.get(1),
-                (String) object.get(2),
+                (int) object.get(2),
                 (String) object.get(3),
-                (int) object.get(4)
+                (String) object.get(4),
+                (Timestamp) object.get(5)
         );
     }
 
@@ -63,11 +66,11 @@ public class Cliente implements Vectorizable{
         this.direccion = direccion;
     }
 
-    public int getFecha() {
+    public Timestamp getFecha() {
         return fecha;
     }
 
-    public void setFecha(int fecha) {
+    public void setFecha(Timestamp fecha) {
         this.fecha = fecha;
     }
 

@@ -1,7 +1,16 @@
 package stomas.andres.controllers;
 
-public class NewClientController {
-    public void execute(String nombre, int telefono, String direccion, String run){
+import stomas.andres.entitys.Cliente;
+import stomas.andres.models.ClientModel;
 
+import java.sql.SQLException;
+
+public class NewClientController {
+    private ClientModel model;
+    public NewClientController(){
+        model = new ClientModel();
+    }
+    public void execute(Cliente cliente) throws SQLException {
+        model.insert(cliente);
     }
 }

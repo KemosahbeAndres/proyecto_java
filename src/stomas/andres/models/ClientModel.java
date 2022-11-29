@@ -1,9 +1,9 @@
 package stomas.andres.models;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import stomas.andres.entitys.Vectorizable;
+
+import java.sql.*;
+import java.time.Instant;
 import java.util.Vector;
 
 public class ClientModel {
@@ -25,12 +25,29 @@ public class ClientModel {
             cliente.add(result.getInt("telefono"));
             cliente.add(result.getString("direccion"));
             cliente.add(result.getString("run"));
-            cliente.add(result.getInt("fecha_cliente"));
+            cliente.add(result.getTimestamp("fecha_cliente"));
 
             clientes.add(cliente);
         }
         result.close();
         connection.close();
         return clientes;
+    }
+
+    public void insert(Vectorizable object) throws SQLException {
+        Vector<Object> vector = object.toVector();
+        connection = manager.getConnection();
+        String query = "INSERT INTO "+tabla+"(nombre, telefono, direccion, run, fecha_cliente) VALUES (?,?,?,?,?)";
+        PreparedStatement statement = connection.prepareStatement(query);
+
+        statement.setString(1, (String) vector.get(1));
+        statement.setInt(2, (int) vector.get(2));
+        statement.setString(3, (String) vector.get(3));
+        statement.setString(4, (String) vector.get(4));
+        statement.setTimestamp(5, (Timestamp) Timestamp.from(Instant.now()));
+
+        statement.execute();
+
+        connection.close();
     }
 }

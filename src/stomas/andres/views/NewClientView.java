@@ -1,11 +1,15 @@
 package stomas.andres.views;
 
 import stomas.andres.controllers.NewClientController;
+import stomas.andres.entitys.Cliente;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.Instant;
 
 public class NewClientView extends Dialog{
     private NewClientController controller;
@@ -76,6 +80,27 @@ public class NewClientView extends Dialog{
             }
         });
         guardar = new JButton("Guardar");
+        guardar.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    controller.execute(new Cliente(
+                            0,
+                            nombre.getText(),
+                            Integer.parseInt(telefono.getText()),
+                            direccion.getText(),
+                            run.getText(),
+                            Timestamp.from(Instant.now())
+                    ));
+                    setVisible(false);
+                }catch (SQLException ex){
+                    JOptionPane.showMessageDialog(null, "Error SQL: "+ ex.getMessage());
+                }catch(Exception exception){
+                    JOptionPane.showMessageDialog(null, "Datos incorrectos: "+exception.getMessage());
+                }
+
+            }
+        });
         action.add(cancelar);
         action.add(guardar);
 
