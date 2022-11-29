@@ -1,35 +1,76 @@
 package stomas.andres.entitys;
 
-public class ProductoCompra {
-    private Producto producto;
-    private int cantidad;
+import java.util.Arrays;
+import java.util.Vector;
 
-    private ProductoCompra() {
+public class ProductoCompra implements Vectorizable{
+    private int id, id_compra;
+    private double precio, cantidad, total;
+    private String nombre;
+    public ProductoCompra(int id, String nombre, double precio, double cantidad, double total, int id_compra) {
+
+    }
+    public ProductoCompra(Vector<Object> object){
+        this(
+                (int) object.get(0),
+                (String) object.get(1),
+                (double) object.get(2),
+                (double) object.get(3),
+                (double) object.get(4),
+                (int) object.get(5)
+        );
     }
 
-    public ProductoCompra(Producto producto, int cantidad) {
-        this.setProducto(producto);
-        this.setCantidad(cantidad);
+    @Override
+    public Vector<Object> toVector() {
+        return new Vector<>(Arrays.asList(new Object[]{id, nombre, precio, cantidad, total, id_compra}));
     }
 
-    public Producto getProducto() {
-        return this.producto;
+    public int getId() {
+        return id;
     }
 
-    public void setProducto(Producto producto) {
-        this.producto = producto;
-        this.setCantidad(1);
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getCantidad() {
-        return this.cantidad;
+    public int getId_compra() {
+        return id_compra;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setId_compra(int id_compra) {
+        this.id_compra = id_compra;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public double getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(double cantidad) {
         this.cantidad = cantidad;
     }
 
-    public int getSubtotal() {
-        return this.producto.getPrecio() * this.cantidad;
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }
