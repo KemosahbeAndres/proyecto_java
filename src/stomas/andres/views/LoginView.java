@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLException;
 
 import static javax.swing.SwingConstants.CENTER;
 
@@ -92,8 +93,16 @@ public class LoginView extends Dialog {
             public void actionPerformed(ActionEvent e) {
                 //controller.tryLogin(userField.getText(), passwordField.getText());
                 System.out.println("Intento de login");
-                ((HomeView) parent).renderContent();
-                setVisible(false);
+                try {
+                    if(controller.execute(userField.getText(), passwordField.getText())){
+                        ((HomeView) parent).renderContent();
+                        setVisible(false);
+                    }else{
+                        JOptionPane.showMessageDialog(parent, "Intenta de nuevo, datos incorrectos.");
+                    }
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(parent, "Error Login: "+ex.getMessage());
+                }
 
             }
         });
@@ -129,6 +138,7 @@ public class LoginView extends Dialog {
 
     @Override
     protected void refresh() {
-
+        userField.setText("");
+        passwordField.setText("");
     }
 }

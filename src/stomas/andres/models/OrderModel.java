@@ -26,7 +26,7 @@ public class OrderModel {
             orden.add(result.getInt("year"));
             orden.add(result.getInt("id_clientes"));
             orden.add(result.getDouble("monto"));
-            orden.add(result.getInt("fecha_compra"));
+            orden.add(result.getTimestamp("fecha_compra"));
 
             ordenes.add(orden);
         }

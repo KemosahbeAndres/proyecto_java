@@ -1,5 +1,6 @@
 package stomas.andres.entitys;
 
+import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Vector;
 
@@ -7,9 +8,9 @@ public class Usuario implements Vectorizable{
     private int id;
     private String usuario;
     private String contraseña;
-    private int fecha;
+    private Timestamp fecha;
 
-    public Usuario(int id, String usuario, String contraseña, int fecha){
+    public Usuario(int id, String usuario, String contraseña, Timestamp fecha){
         setId(id);
         setUsuario(usuario);
         setContraseña(contraseña);
@@ -20,13 +21,13 @@ public class Usuario implements Vectorizable{
                 (int) object.get(0),
                 (String) object.get(1),
                 (String) object.get(2),
-                (int) object.get(3)
+                (Timestamp) object.get(3)
         );
     }
 
     @Override
     public Vector<Object> toVector() {
-        return new Vector<>(Arrays.asList(new Object[]{ id, usuario, fecha }));
+        return new Vector<>(Arrays.asList(new Object[]{ id, usuario, contraseña, fecha }));
     }
 
     public int getId() {
@@ -53,11 +54,11 @@ public class Usuario implements Vectorizable{
         this.contraseña = contraseña;
     }
 
-    public int getFecha() {
+    public Timestamp getFecha() {
         return fecha;
     }
 
-    private void setFecha(int fecha) {
+    private void setFecha(Timestamp fecha) {
         this.fecha = fecha;
     }
 }

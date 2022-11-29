@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class HomeView extends JFrame {
+public class HomeView extends View {
     private LoginView loginView;
     private ListClientsView listClientsView;
     private NewClientView newClientView;
@@ -25,6 +25,9 @@ public class HomeView extends JFrame {
     private LoginController loginController;
     private RegisterController registerController;
     private ListOrdersController controller;
+    private OrderTable ordenes;
+    private JPanel main;
+    private JButton refrescar;
     private JMenuBar mainBar;
     private JMenu mClientes, mProductos, mOrdenes, mUsuarios;
     private JMenuItem iAddClient, iListClients, iAddProduct, iListProducts, iAddOrder, iAddUser;
@@ -44,6 +47,18 @@ public class HomeView extends JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        ordenes = new OrderTable();
+        refrescar = new JButton("Refrescar");
+        refrescar.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    ordenes.inserData(controller.execute());
+                }catch (SQLException ex){
+                    JOptionPane.showMessageDialog(null, "Error al refrescar: "+ex.getMessage());
+                }
+            }
+        });
 
         mainBar = new JMenuBar();
 
@@ -108,6 +123,7 @@ public class HomeView extends JFrame {
 
         add(mainBar, BorderLayout.NORTH);
 
+
         if(loginView.doLogin()){
             renderContent();
         }else{
@@ -117,10 +133,10 @@ public class HomeView extends JFrame {
         //setVisible(true);
     }
     public void renderContent(){
-        JPanel main = new JPanel();
+        main = new JPanel();
         main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
         main.setBorder(new EmptyBorder(10,10,10,10));
-        OrderTable ordenes = new OrderTable();
+
 /*
         List<List<Object>> compras = new ArrayList<List<Object>>();
         compras.add(new ArrayList<>(Arrays.asList(new Object[]{0, 100, 2022, "Andres", 20.20, "Hoy" })));
@@ -132,9 +148,27 @@ public class HomeView extends JFrame {
             JOptionPane.showMessageDialog(this, "Error SQL: "+e.getMessage());
         }
         System.out.println(ordenes.getColumnCount());
-        main.add(new JLabel("Lista de Compras:", SwingConstants.LEFT));
+        JPanel line = new JPanel();
+        line.setLayout(new FlowLayout(FlowLayout.LEFT));
+        line.add(refrescar);
+        line.add(new JLabel("Lista de Compras:", SwingConstants.LEFT));
+
+        main.add(line);
+
         main.add(ordenes.getScrollTable());
         add(main, BorderLayout.CENTER);
+    }
+    @Override
+    public void refresh(){
+        /*try{
+            if(ordenes != null){
+                ordenes.inserData(controller.execute());
+            }else{
+                System.out.println("Es nulo;");
+            }
+        }catch (SQLException e){
+            JOptionPane.showMessageDialog(this, "Error SQL: "+e.getMessage());
+        }*/
     }
 
 

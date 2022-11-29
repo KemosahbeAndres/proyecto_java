@@ -9,4 +9,11 @@ public abstract class View extends JFrame {
     public View(){
         this("");
     }
+    public abstract void refresh();
+
+    @Override
+    public void setVisible(boolean b) {
+        super.setVisible(b);
+        refresh();
+    }
 }

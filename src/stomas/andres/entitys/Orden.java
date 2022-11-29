@@ -1,14 +1,17 @@
 package stomas.andres.entitys;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 
 public class Orden implements Vectorizable{
-    private int id, numero, year, id_cliente, fecha_compra;
+    private int id, numero, year, id_cliente;
+    private Timestamp fecha_compra;
     private double monto;
     private List<ProductoCompra> productoCompras;
-    public Orden(int id, int numero, int year, int id_cliente, double monto, int fecha_compra){
+    public Orden(int id, int numero, int year, int id_cliente, double monto, Timestamp fecha_compra){
         setId(id);
         setNumero(numero);
         setYear(year);
@@ -23,7 +26,7 @@ public class Orden implements Vectorizable{
                 (int) object.get(2),
                 (int) object.get(3),
                 (double) object.get(4),
-                (int) object.get(5)
+                (Timestamp) object.get(5)
         );
     }
 
@@ -66,11 +69,11 @@ public class Orden implements Vectorizable{
         this.id_cliente = id_cliente;
     }
 
-    public int getFecha_compra() {
+    public Timestamp getFecha_compra() {
         return fecha_compra;
     }
 
-    public void setFecha_compra(int fecha_compra) {
+    public void setFecha_compra(Timestamp fecha_compra) {
         this.fecha_compra = fecha_compra;
     }
 
