@@ -15,6 +15,7 @@ import java.util.List;
 public class ListClientsView extends Dialog {
     private ClientTable table;
     private JScrollPane scPanel;
+    private JTextField text;
     private ListClientsController controller;
     public ListClientsView(ListClientsController ctr){
         this(null, ctr);
@@ -39,7 +40,9 @@ public class ListClientsView extends Dialog {
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
         panel.add(new JLabel("Buscar"));
-        panel.add(table.getFilterField());
+        text = table.getFilterField();
+
+        panel.add(text);
 
         add(panel, BorderLayout.NORTH);
         add(table.getScrollTable(), BorderLayout.CENTER);
@@ -50,6 +53,7 @@ public class ListClientsView extends Dialog {
     protected void refresh() {
         try{
             table.inserData(controller.execute());
+            text = table.getFilterField();
         }catch (SQLException e){
             JOptionPane.showMessageDialog(this, "Error SQL: "+e.getMessage());
         }

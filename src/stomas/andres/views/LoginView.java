@@ -98,7 +98,7 @@ public class LoginView extends Dialog {
                         ((HomeView) parent).renderContent();
                         setVisible(false);
                     }else{
-                        JOptionPane.showMessageDialog(parent, "Intenta de nuevo, datos incorrectos.");
+                        JOptionPane.showMessageDialog(null, "Intenta de nuevo, datos incorrectos.");
                     }
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(parent, "Error Login: "+ex.getMessage());
