@@ -1,15 +1,14 @@
 package stomas.andres.entitys;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 
-public class Compra implements Vectorizable{
+public class Orden implements Vectorizable{
     private int id, numero, year, id_cliente, fecha_compra;
     private double monto;
     private List<ProductoCompra> productoCompras;
-    public Compra(int id, int numero, int year, int id_cliente, double monto, int fecha_compra){
+    public Orden(int id, int numero, int year, int id_cliente, double monto, int fecha_compra){
         setId(id);
         setNumero(numero);
         setYear(year);
@@ -17,7 +16,7 @@ public class Compra implements Vectorizable{
         setMonto(monto);
         setFecha_compra(fecha_compra);
     }
-    public Compra(Vector<Object> object){
+    public Orden(Vector<Object> object){
         this(
                 (int) object.get(0),
                 (int) object.get(1),

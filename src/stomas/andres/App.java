@@ -3,6 +3,7 @@ package stomas.andres;
 import stomas.andres.controllers.ListOrdersController;
 import stomas.andres.controllers.LoginController;
 import stomas.andres.controllers.RegisterController;
+import stomas.andres.models.OrderModel;
 import stomas.andres.views.HomeView;
 import stomas.andres.views.LoginView;
 import stomas.andres.views.RegisterView;
@@ -17,7 +18,7 @@ public class App {
 
         registerController = new RegisterController();
         loginController = new LoginController();
-        loController = new ListOrdersController();
+        loController = new ListOrdersController(new OrderModel());
 
         homeView = new HomeView(loController, loginController, registerController);
         this.run();

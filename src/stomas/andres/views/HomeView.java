@@ -1,6 +1,8 @@
 package stomas.andres.views;
 
 import stomas.andres.controllers.*;
+import stomas.andres.models.ClientModel;
+import stomas.andres.models.OrderModel;
 import stomas.andres.models.ProductModel;
 import stomas.andres.views.tablas.OrderTable;
 
@@ -8,6 +10,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,11 +34,11 @@ public class HomeView extends JFrame {
         this.registerController = registerController;
         loginView = new LoginView(this, loginController, registerController);
         controller = loController;
-        listClientsView = new ListClientsView(this, new ListClientsController());
+        listClientsView = new ListClientsView(this, new ListClientsController(new ClientModel()));
         newClientView = new NewClientView(this, new NewClientController());
         newProductView = new NewProductView(this, new NewProductController());
         listProductsView = new ListProductsView(this, new ListProductsController(new ProductModel()));
-        newOrderView = new NewOrderView(this, new NewOrderController());
+        newOrderView = new NewOrderView(this, new NewOrderController(new OrderModel()));
 
         setSize(600,300);
         setResizable(false);
@@ -118,12 +121,16 @@ public class HomeView extends JFrame {
         main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
         main.setBorder(new EmptyBorder(10,10,10,10));
         OrderTable ordenes = new OrderTable();
-
+/*
         List<List<Object>> compras = new ArrayList<List<Object>>();
         compras.add(new ArrayList<>(Arrays.asList(new Object[]{0, 100, 2022, "Andres", 20.20, "Hoy" })));
         compras.add(new ArrayList<>(Arrays.asList(new Object[]{1, 300, 2021, "PEPE", 50.00, "Hoy" })));
-
-        ordenes.inserData(compras);
+*/
+        try{
+            ordenes.inserData(controller.execute());
+        }catch (SQLException e){
+            JOptionPane.showMessageDialog(this, "Error SQL: "+e.getMessage());
+        }
         System.out.println(ordenes.getColumnCount());
         main.add(new JLabel("Lista de Compras:", SwingConstants.LEFT));
         main.add(ordenes.getScrollTable());
