@@ -14,4 +14,10 @@ public abstract class Dialog extends JDialog {
         super(parent, title, true);
     }
 
+    protected abstract void refresh();
+    @Override
+    public void setVisible(boolean b) {
+        super.setVisible(b);
+        refresh();
+    }
 }

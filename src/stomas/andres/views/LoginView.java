@@ -127,5 +127,8 @@ public class LoginView extends Dialog {
         });*/
     }
 
+    @Override
+    protected void refresh() {
 
+    }
 }

@@ -1,5 +1,6 @@
 package stomas.andres.views.tablas;
 
+import stomas.andres.entitys.Vectorizable;
 import stomas.andres.views.DocumentAdapter;
 
 import javax.swing.*;
@@ -42,6 +43,13 @@ public abstract class DefaultTable extends JTable {
             vectorized.add(vector);
         }
         insertData(vectorized);
+    }
+    public void inserData(Vector<Vectorizable> filas) {
+        Vector<Vector<Object>> productos = new Vector<>();
+        for(Vectorizable v: filas){
+            productos.add(v.toVector());
+        }
+        insertData(productos);
     }
     public void insertData(Vector<Vector<Object>> filas){
         try {

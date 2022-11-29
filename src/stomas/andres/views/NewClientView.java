@@ -5,6 +5,7 @@ import stomas.andres.controllers.NewClientController;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 public class NewClientView extends Dialog{
     private NewClientController controller;
@@ -14,7 +15,7 @@ public class NewClientView extends Dialog{
     public NewClientView(Frame parent, NewClientController controller){
         super(parent, "Agregar cliente");
         this.controller = controller;
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
         setSize(500,200);
         setResizable(false);
         setLocationRelativeTo(null);
@@ -68,6 +69,12 @@ public class NewClientView extends Dialog{
         action.setLayout(new FlowLayout(FlowLayout.CENTER));
         action.setBorder(new EmptyBorder(5,10,20,10));
         cancelar = new JButton("Cancelar");
+        cancelar.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+            }
+        });
         guardar = new JButton("Guardar");
         action.add(cancelar);
         action.add(guardar);
@@ -75,6 +82,14 @@ public class NewClientView extends Dialog{
         add(main, BorderLayout.CENTER);
         add(action, BorderLayout.SOUTH);
 
+    }
+
+    @Override
+    protected void refresh() {
+        nombre.setText("");
+        direccion.setText("");
+        run.setText("");
+        telefono.setText("");
     }
 
     public static void main(String[] args) {

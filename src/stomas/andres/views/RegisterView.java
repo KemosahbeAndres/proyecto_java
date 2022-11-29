@@ -95,4 +95,8 @@ public class RegisterView extends Dialog {
         //setVisible(true);
     }
 
+    @Override
+    protected void refresh() {
+
+    }
 }

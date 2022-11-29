@@ -1,14 +1,18 @@
 package stomas.andres.views;
 
 import stomas.andres.controllers.ListClientsController;
+import stomas.andres.views.tablas.ClientTable;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ListClientsView extends Dialog {
-    private JTable table;
+    private ClientTable table;
     private JScrollPane scPanel;
     private ListClientsController controller;
     public ListClientsView(ListClientsController ctr){
@@ -21,26 +25,26 @@ public class ListClientsView extends Dialog {
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
-        String[][] data = {
-                { "Kundan Kumar Jha", "4031", "CSE" },
-                { "Anand Jha", "6014", "IT" }
-        };
-        String[] columnNames = { "Nombre", "Run", "Direccion", "Email" };
 
-        table = TableFactory.buildTable(columnNames, data);
+        table = new ClientTable();
+        List<List<Object>> lista = new ArrayList<List<Object>>();
+        lista.add(new ArrayList<>(Arrays.asList(new Object[]{"Andres", "19.149.514-4", "Avenida Diego Portales", "a.cubillos@ribd.cl"})));
+        lista.add(new ArrayList<>(Arrays.asList(new Object[]{"Pedro", "8.435.678-2", "Avenida sIEMPRE VIVA", "p.rebolledo@ribd.cl"})));
 
-        table.setEnabled(false);
-
-        scPanel = new JScrollPane(table);
-        scPanel.setBorder(new EmptyBorder(10,10,10,10));
+        table.inserData(lista);
 
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
         panel.add(new JLabel("Buscar"));
-        panel.add(TableFactory.buildFilter(table));
+        panel.add(table.getFilterField());
 
         add(panel, BorderLayout.NORTH);
-        add(scPanel, BorderLayout.CENTER);
+        add(table.getScrollTable(), BorderLayout.CENTER);
+
+    }
+
+    @Override
+    protected void refresh() {
 
     }
 

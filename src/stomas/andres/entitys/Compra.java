@@ -4,26 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Compra {
-    private List<Item> items;
+    private List<ProductoCompra> productoCompras;
     public Compra(){
-        setItems(new ArrayList<Item>());
+        setItems(new ArrayList<ProductoCompra>());
     }
 
-    private void setItems(List<Item> items) {
-        this.items = items;
+    private void setItems(List<ProductoCompra> productoCompras) {
+        this.productoCompras = productoCompras;
     }
 
     public void agregarProducto(Producto producto, int cantidad){
-        items.add(new Item(producto, cantidad));
+        productoCompras.add(new ProductoCompra(producto, cantidad));
     }
 
-    public List<Item> getProducts() {
-        return items;
+    public List<ProductoCompra> getProducts() {
+        return productoCompras;
     }
 
     private int getTotal(){
         int total = 0;
-        for(Item it: this.items){
+        for(ProductoCompra it: this.productoCompras){
             total += it.getSubtotal();
         }
         return total;

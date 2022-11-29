@@ -1,5 +1,7 @@
 package stomas.andres.models;
 
-public class ModeloProductoComprado {
+public class UserModel {
     private static final String tabla = "";
+    public UserModel(){}
+
 }

@@ -1,12 +1,15 @@
 package stomas.andres.views.tablas;
 
+import stomas.andres.entitys.Vectorizable;
+
 import java.util.Arrays;
 import java.util.Vector;
 
 public class ClientTable extends DefaultTable{
     public ClientTable(){
-        super(new String[]{"Nombre", "Run", "Direccion", "Correo"});
+        super(new String[]{"ID","Nombre", "Run", "Direccion", "Correo"});
     }
+
 
     @Override
     protected Class<?> getRealColumnClass(int columnIndex) {

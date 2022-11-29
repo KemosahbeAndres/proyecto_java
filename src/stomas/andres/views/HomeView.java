@@ -1,6 +1,7 @@
 package stomas.andres.views;
 
 import stomas.andres.controllers.*;
+import stomas.andres.models.ProductModel;
 import stomas.andres.views.tablas.OrderTable;
 
 import javax.swing.*;
@@ -15,6 +16,9 @@ public class HomeView extends JFrame {
     private LoginView loginView;
     private ListClientsView listClientsView;
     private NewClientView newClientView;
+    private NewProductView newProductView;
+    private ListProductsView listProductsView;
+    private NewOrderView newOrderView;
     private LoginController loginController;
     private RegisterController registerController;
     private ListOrdersController controller;
@@ -29,6 +33,10 @@ public class HomeView extends JFrame {
         controller = loController;
         listClientsView = new ListClientsView(this, new ListClientsController());
         newClientView = new NewClientView(this, new NewClientController());
+        newProductView = new NewProductView(this, new NewProductController());
+        listProductsView = new ListProductsView(this, new ListProductsController(new ProductModel()));
+        newOrderView = new NewOrderView(this, new NewOrderController());
+
         setSize(600,300);
         setResizable(false);
         setLocationRelativeTo(null);
@@ -57,13 +65,31 @@ public class HomeView extends JFrame {
 
         mProductos = new JMenu("Productos");
         iAddProduct = new JMenuItem("Agregar Producto");
+        iAddProduct.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                newProductView.setVisible(true);
+            }
+        });
         iListProducts = new JMenuItem("Listar Productos");
+        iListProducts.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                listProductsView.setVisible(true);
+            }
+        });
 
         mProductos.add(iAddProduct);
         mProductos.add(iListProducts);
 
         mOrdenes = new JMenu("Compras");
         iAddOrder = new JMenuItem("Generar Orden");
+        iAddOrder.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                newOrderView.setVisible(true);
+            }
+        });
 
         mOrdenes.add(iAddOrder);
 

@@ -1,13 +1,13 @@
 package stomas.andres.entitys;
 
-public class Item {
+public class ProductoCompra {
     private Producto producto;
     private int cantidad;
 
-    private Item() {
+    private ProductoCompra() {
     }
 
-    public Item(Producto producto, int cantidad) {
+    public ProductoCompra(Producto producto, int cantidad) {
         this.setProducto(producto);
         this.setCantidad(cantidad);
     }

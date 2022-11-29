@@ -1,7 +1,10 @@
 package stomas.andres.views.tablas;
 
+import stomas.andres.entitys.Vectorizable;
+
 import javax.swing.*;
 import java.util.Date;
+import java.util.Vector;
 
 public class OrderTable extends DefaultTable{
     public OrderTable(){
