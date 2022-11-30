@@ -1,5 +1,7 @@
 package stomas.andres.models;
 
+import stomas.andres.entitys.Vectorizable;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,5 +32,32 @@ public class ProductModel {
         result.close();
         connection.close();
         return productos;
+    }
+    public Vector<Object> searchByName(String name) throws SQLException {
+        Vector<Object> vector = new Vector<>();
+        connection = manager.getConnection();
+        Statement st = connection.createStatement();
+        ResultSet result = st.executeQuery("SELECT * FROM "+tabla+" WHERE nombre LIKE '%"+name.trim()+"%' LIMIT 1;");
+        while(result.next()){
+            vector.add(result.getInt("id"));
+            vector.add(result.getString("nombre"));
+            vector.add(result.getInt("precio"));
+            vector.add(result.getInt("stock"));
+        }
+        result.close();
+        connection.close();
+        return vector;
+    }
+    public int count(String name) throws SQLException{
+        int cantidad = 0;
+        connection = manager.getConnection();
+        Statement st = connection.createStatement();
+        ResultSet result = st.executeQuery("SELECT COUNT(*) FROM "+tabla+" WHERE nombre LIKE '%"+name.trim()+"%';");
+        while(result.next()){
+            cantidad = (int) result.getInt(1);
+        }
+        result.close();
+        connection.close();
+        return cantidad;
     }
 }

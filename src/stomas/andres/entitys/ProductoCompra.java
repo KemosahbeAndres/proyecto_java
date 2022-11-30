@@ -8,7 +8,7 @@ public class ProductoCompra implements Vectorizable{
     private double precio, cantidad, total;
     private String nombre;
     private ProductoCompra(int id, String nombre, double precio, double cantidad, double total, int id_compra) {
-        this(id, nombre, precio, cantidad);
+        this(id, nombre, precio, cantidad, id_compra);
     }
     public ProductoCompra(Vector<Object> object){
         this(
@@ -25,7 +25,7 @@ public class ProductoCompra implements Vectorizable{
         setNombre(nombre);
         setPrecio(precio);
         setCantidad(cantidad);
-        setTotal(precio * cantidad);
+        setId_compra(id_compra);
     }
 
     @Override
@@ -55,6 +55,7 @@ public class ProductoCompra implements Vectorizable{
 
     public void setPrecio(double precio) {
         this.precio = precio;
+        updateTotal();
     }
 
     public double getCantidad() {
@@ -63,13 +64,22 @@ public class ProductoCompra implements Vectorizable{
 
     public void setCantidad(double cantidad) {
         this.cantidad = cantidad;
+        updateTotal();
+    }
+
+    private void updateTotal(){
+        if(getPrecio() > 0 && getCantidad() > 0){
+            setTotal(getPrecio() * getCantidad());
+        }else{
+            setTotal(0);
+        }
     }
 
     public double getTotal() {
         return total;
     }
 
-    public void setTotal(double total) {
+    private void setTotal(double total) {
         this.total = total;
     }
 
