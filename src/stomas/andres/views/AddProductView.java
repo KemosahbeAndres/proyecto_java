@@ -3,6 +3,7 @@ package stomas.andres.views;
 import stomas.andres.controllers.AddProductController;
 import stomas.andres.controllers.SearchProductController;
 import stomas.andres.entitys.Cliente;
+import stomas.andres.entitys.Producto;
 import stomas.andres.entitys.ProductoCompra;
 import stomas.andres.entitys.Vectorizable;
 import stomas.andres.models.ProductItemModel;
@@ -111,8 +112,30 @@ public class AddProductView extends Dialog{
         cantidad.setValue(1);
 
         agregar = new JButton("Agregar");
+        agregar.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String texto = buscar.getText().trim().toLowerCase();
+                if(texto.length()>0) {
+                    try {
+                        if(controller.existencias(texto) > 0) {
+                            Producto producto = controller.search(texto);
+                            int cant = (int) cantidad.getValue();
+                            glosa.add(new ProductoCompra(producto, cant, 1));
+                        }
+                    } catch (SQLException sql) {
+                        System.out.println(sql.getMessage());
+                    } catch (Exception ex) {
+                        System.out.println(ex.getMessage());
+                    }
+
+                }
+                refresh();
+            }
+        });
         quitar = new JButton("Quitar");
         quitar.setEnabled(false);
+
         JPanel prod = new JPanel();
         prod.setLayout(new BoxLayout(prod, BoxLayout.Y_AXIS));
         JPanel prodiv = new JPanel();
@@ -186,8 +209,9 @@ public class AddProductView extends Dialog{
     @Override
     protected void refresh() {
         buscar.setText("");
-        cantidad.setText("");
-        //table.inserData(controller.execute());
+        cantidad.setValue(1);
+        menos.setEnabled(false);
+        table.inserData(glosa);
     }
 
     public static void main(String[] args) {

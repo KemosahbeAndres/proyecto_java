@@ -27,6 +27,15 @@ public class ProductoCompra implements Vectorizable{
         setCantidad(cantidad);
         setId_compra(id_compra);
     }
+    public ProductoCompra(Producto producto, int cantidad, int id_compra){
+        this(
+                producto.getId(),
+                producto.getNombre(),
+                (double) producto.getPrecio(),
+                (double) cantidad,
+                id_compra
+        );
+    }
 
     @Override
     public Vector<Object> toVector() {
