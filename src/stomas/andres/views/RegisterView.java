@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
 
 public class RegisterView extends Dialog {
     private JButton guardar_btn, cancelar_btn;
@@ -15,12 +16,12 @@ public class RegisterView extends Dialog {
     private JTextField user_tf, pass_tf, repeat_tf;
     private RegisterController rController;
 
-    public RegisterView(Frame parent, RegisterController controller){
+    public RegisterView(View parent, RegisterController controller){
         super(parent, "Registrar usuario");
 
         rController = controller;
 
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
         setSize(400, 300);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -82,7 +83,29 @@ public class RegisterView extends Dialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Guardando...");
-                setVisible(false);
+                String usuario = user_tf.getText();
+                String clave = pass_tf.getText();
+                String repetir = repeat_tf.getText();
+                if(!usuario.isEmpty()
+                && !clave.isEmpty()
+                && !repetir.isEmpty()){
+                    try{
+                        if(clave.equals(repetir)){
+                            rController.execute(user_tf.getText(), pass_tf.getText());
+                            JOptionPane.showMessageDialog(parent, "Usuario guardado con exito", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                            setVisible(false);
+                        }else{
+                            JOptionPane.showMessageDialog(parent, "La contraseña no coincide. Debes ingresar la misma en ambos campos.");
+                        }
+                    }catch(SQLException se){
+                        JOptionPane.showMessageDialog(parent, "Error al guardar: "+se.getMessage());
+                    }catch(Exception ex){
+                        JOptionPane.showMessageDialog(parent, ex.getMessage());
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(parent, "Datos vacios. Debes llenar lo campos antes de guardar.");
+                }
+
             }
         });
         action_panel.add(cancelar_btn);
@@ -91,12 +114,13 @@ public class RegisterView extends Dialog {
         main_panel.add(action_panel);
 
         add(main_panel);
-        setAlwaysOnTop(true);
         //setVisible(true);
     }
 
     @Override
     protected void refresh() {
-
+        user_tf.setText("");
+        pass_tf.setText("");
+        repeat_tf.setText("");
     }
 }

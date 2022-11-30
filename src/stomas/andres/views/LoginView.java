@@ -28,15 +28,21 @@ public class LoginView extends Dialog {
         return false;
     }
     private static final Font tFont = new Font("Dialog", Font.BOLD, 20);
-    public LoginView(Frame parent, LoginController controller, RegisterController registerController){
+    public LoginView(View parent, LoginController controller, RegisterController registerController){
         super(parent, "Iniciar sesion");
         registerView = new RegisterView(parent, registerController);
         this.controller = controller;
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         setResizable(false);
-        setAlwaysOnTop(true);
         setSize(400,280);
         setLocationRelativeTo(null);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                System.exit(0);
+            }
+        });
 
         setLayout(new BorderLayout());
 
@@ -98,7 +104,7 @@ public class LoginView extends Dialog {
                         ((HomeView) parent).renderContent();
                         setVisible(false);
                     }else{
-                        JOptionPane.showMessageDialog(null, "Intenta de nuevo, datos incorrectos.");
+                        JOptionPane.showMessageDialog(parent, "Intenta de nuevo, datos incorrectos.");
                     }
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(parent, "Error Login: "+ex.getMessage());

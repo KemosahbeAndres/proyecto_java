@@ -1,9 +1,9 @@
 package stomas.andres.models;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import stomas.andres.entitys.Vectorizable;
+
+import java.sql.*;
+import java.time.Instant;
 import java.util.Vector;
 
 public class UserModel {
@@ -13,10 +13,10 @@ public class UserModel {
     public UserModel(){
         manager = DBManager.getManager();
     }
-    public Vector<Vector<Object>> login() throws SQLException {
+    public Vector<Vector<Object>> selectAll() throws SQLException {
         connection = manager.getConnection();
         Statement st = connection.createStatement();
-        ResultSet result = st.executeQuery("SELECT * FROM "+tabla+" LIMIT 1;");
+        ResultSet result = st.executeQuery("SELECT * FROM "+tabla+";");
         Vector<Vector<Object>> usuarios = new Vector<>();
         while(result.next()){
             Vector<Object> usuario = new Vector<>();
@@ -29,6 +29,21 @@ public class UserModel {
         result.close();
         connection.close();
         return usuarios;
+    }
+
+    public void insert(Vectorizable object) throws SQLException{
+        Vector<Object> vector = object.toVector();
+        connection = manager.getConnection();
+        String query = "INSERT INTO "+tabla+"(usuario, password, fecha) VALUES (?,?,?)";
+        PreparedStatement statement = connection.prepareStatement(query);
+
+        statement.setString(1, (String) vector.get(1));
+        statement.setString(2, (String) vector.get(2));
+        statement.setTimestamp(3, (Timestamp) vector.get(3));
+
+        statement.execute();
+
+        connection.close();
     }
 
 }

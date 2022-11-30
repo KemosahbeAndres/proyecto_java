@@ -1,6 +1,7 @@
 package stomas.andres.views;
 
 import stomas.andres.controllers.*;
+import stomas.andres.models.BuyProductModel;
 import stomas.andres.models.ClientModel;
 import stomas.andres.models.OrderModel;
 import stomas.andres.models.ProductModel;
@@ -19,7 +20,7 @@ public class HomeView extends View {
     private LoginView loginView;
     private ListClientsView listClientsView;
     private NewClientView newClientView;
-    private NewProductView newProductView;
+    private AddProductView addProductView;
     private ListProductsView listProductsView;
     private NewOrderView newOrderView;
     private LoginController loginController;
@@ -39,7 +40,7 @@ public class HomeView extends View {
         controller = loController;
         listClientsView = new ListClientsView(this, new ListClientsController(new ClientModel()));
         newClientView = new NewClientView(this, new NewClientController());
-        newProductView = new NewProductView(this, new NewProductController());
+        addProductView = new AddProductView(this, new AddProductController(new BuyProductModel()));
         listProductsView = new ListProductsView(this, new ListProductsController(new ProductModel()));
         newOrderView = new NewOrderView(this, new NewOrderController(new OrderModel()));
 
@@ -86,7 +87,7 @@ public class HomeView extends View {
         iAddProduct.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                newProductView.setVisible(true);
+                addProductView.setVisible(true);
             }
         });
         iListProducts = new JMenuItem("Listar Productos");
@@ -118,8 +119,8 @@ public class HomeView extends View {
 
         mainBar.add(mClientes);
         mainBar.add(mProductos);
-        mainBar.add(mOrdenes);
-        mainBar.add(mUsuarios);
+        //mainBar.add(mOrdenes);
+        //mainBar.add(mUsuarios);
 
         add(mainBar, BorderLayout.NORTH);
 

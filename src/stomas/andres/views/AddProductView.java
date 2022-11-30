@@ -1,12 +1,12 @@
 package stomas.andres.views;
 
-import stomas.andres.controllers.NewProductController;
+import stomas.andres.controllers.AddProductController;
 
 import java.awt.*;
 
 public class AddProductView extends Dialog{
-    private NewProductController controller;
-    public AddProductView(Frame parent, NewProductController controller){
+    private AddProductController controller;
+    public AddProductView(Frame parent, AddProductController controller){
         super(parent, "Agregar Producto");
         this.controller = controller;
         setDefaultCloseOperation(HIDE_ON_CLOSE);
@@ -22,8 +22,4 @@ public class AddProductView extends Dialog{
 
     }
 
-    public static void main(String[] args) {
-        AddProductView view = new AddProductView(null, new NewProductController());
-        view. setVisible(true);
-    }
 }

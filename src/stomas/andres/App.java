@@ -4,20 +4,21 @@ import stomas.andres.controllers.ListOrdersController;
 import stomas.andres.controllers.LoginController;
 import stomas.andres.controllers.RegisterController;
 import stomas.andres.models.OrderModel;
+import stomas.andres.models.UserModel;
 import stomas.andres.views.HomeView;
 import stomas.andres.views.LoginView;
 import stomas.andres.views.RegisterView;
 
 public class App {
-
-    LoginController loginController;
+    private UserModel userModel;
+    private LoginController loginController;
     private RegisterController registerController;
     private ListOrdersController loController;
     private HomeView homeView;
     public App(){
-
-        registerController = new RegisterController();
-        loginController = new LoginController();
+        userModel = new UserModel();
+        registerController = new RegisterController(userModel);
+        loginController = new LoginController(userModel);
         loController = new ListOrdersController(new OrderModel());
 
         homeView = new HomeView(loController, loginController, registerController);
