@@ -1,7 +1,7 @@
 package stomas.andres.views;
 
 import stomas.andres.controllers.*;
-import stomas.andres.models.BuyProductModel;
+import stomas.andres.models.ProductItemModel;
 import stomas.andres.models.ClientModel;
 import stomas.andres.models.OrderModel;
 import stomas.andres.models.ProductModel;
@@ -12,9 +12,6 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class HomeView extends View {
     private LoginView loginView;
@@ -40,8 +37,8 @@ public class HomeView extends View {
         controller = loController;
         listClientsView = new ListClientsView(this, new ListClientsController(new ClientModel()));
         newClientView = new NewClientView(this, new NewClientController());
-        addProductView = new AddProductView(this, new AddProductController(new BuyProductModel()));
-        listProductsView = new ListProductsView(this, new ListProductsController(new ProductModel()));
+        addProductView = new AddProductView(this, new AddProductController(new ProductItemModel()));
+        listProductsView = new ListProductsView(this, new ListProductsController(new ProductModel(), new ProductItemModel()));
         newOrderView = new NewOrderView(this, new NewOrderController(new OrderModel()));
 
         setSize(600,300);

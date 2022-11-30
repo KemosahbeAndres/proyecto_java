@@ -32,6 +32,11 @@ public abstract class DefaultTable extends JTable {
     }
     private void insertColumns(Vector<String> columnas){
         this.columnas = new Vector<>(columnas);
+        try {
+            setModel(new DefaultTableModel(new Vector<Vector<Object>>(), columnas));
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
     public void inserData(List<List<Object>> filas){
         Vector<Vector<Object>> vectorized = new Vector<>();

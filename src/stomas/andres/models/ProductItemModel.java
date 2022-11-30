@@ -6,11 +6,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
 
-public class BuyProductModel {
+public class ProductItemModel {
     private static final String tabla = "productos_compras";
     private DBManager manager;
     private Connection connection;
-    public BuyProductModel(){
+    public ProductItemModel(){
         manager = DBManager.getManager();
     }
     public Vector<Vector<Object>> selectAll() throws SQLException {

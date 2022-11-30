@@ -7,8 +7,8 @@ public class ProductoCompra implements Vectorizable{
     private int id, id_compra;
     private double precio, cantidad, total;
     private String nombre;
-    public ProductoCompra(int id, String nombre, double precio, double cantidad, double total, int id_compra) {
-
+    private ProductoCompra(int id, String nombre, double precio, double cantidad, double total, int id_compra) {
+        this(id, nombre, precio, cantidad);
     }
     public ProductoCompra(Vector<Object> object){
         this(
@@ -19,6 +19,13 @@ public class ProductoCompra implements Vectorizable{
                 (double) object.get(4),
                 (int) object.get(5)
         );
+    }
+    public ProductoCompra(int id, String nombre, double precio, double cantidad, int id_compra){
+        setId(id);
+        setNombre(nombre);
+        setPrecio(precio);
+        setCantidad(cantidad);
+        setTotal(precio * cantidad);
     }
 
     @Override

@@ -32,7 +32,7 @@ public class LoginView extends Dialog {
         super(parent, "Iniciar sesion");
         registerView = new RegisterView(parent, registerController);
         this.controller = controller;
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setResizable(false);
         setSize(400,280);
         setLocationRelativeTo(null);
@@ -84,6 +84,14 @@ public class LoginView extends Dialog {
 
         passpanel.add(new JLabel("Contraseña:"));
         passwordField = new JPasswordField(10);
+        passwordField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                    loginBtn.doClick();
+                }
+            }
+        });
         passpanel.add(passwordField);
 
         mainpanel.add(passpanel);
@@ -145,6 +153,7 @@ public class LoginView extends Dialog {
     @Override
     protected void refresh() {
         userField.setText("");
+        userField.requestFocus();
         passwordField.setText("");
     }
 }
