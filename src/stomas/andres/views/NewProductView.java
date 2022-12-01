@@ -72,9 +72,4 @@ public class NewProductView extends Dialog{
     protected void refresh() {
 
     }
-
-    public static void main(String[] args) {
-        NewProductView view = new NewProductView(null, new NewProductController());
-        view.setVisible(true);
-    }
 }

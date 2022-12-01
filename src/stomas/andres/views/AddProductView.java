@@ -41,8 +41,8 @@ public class AddProductView extends Dialog{
         this.clientController = cController;
         this.orderController = oController;
         setDefaultCloseOperation(HIDE_ON_CLOSE);
-        setSize(600,500);
-        setResizable(true);
+        setSize(700,500);
+        setResizable(false);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
@@ -281,34 +281,43 @@ public class AddProductView extends Dialog{
         action.setLayout(new FlowLayout(FlowLayout.CENTER));
         action.setBorder(new EmptyBorder(0,20,20,20));
 
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                setVisible(false);
+                refresh();
+                limpiar();
+            }
+        });
+
         cancelar = new JButton("Cancelar");
         cancelar.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
                 refresh();
-                cliente = null;
-                glosa.clear();
+                limpiar();
             }
         });
         guardar = new JButton("Guardar");
         guardar.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(glosa.size()>0 && cliente != null){
-                    try{
-                        orderController.execute(glosa, cliente);
-                    }catch (SQLException sql){
-                        JOptionPane.showMessageDialog(parent, "No se pudo generar la orden. ERROR: "+ sql.getMessage());
-                    }
-                    refresh();
-                    cliente = null;
-                    glosa.clear();
-                    JOptionPane.showMessageDialog(parent, "Orden generada con exito.");
-                    setVisible(false);
-                }else{
-                    JOptionPane.showMessageDialog(parent, "No puedes generar una orden vacia.");
+                try{
+                    if(glosa.size()<=0) throw new Exception("Debes ingresar al menos 1 producto.");
+                    if(cliente == null) throw new Exception("Debes seleccionar un cliente.");
+                    orderController.execute(glosa, cliente);
+                }catch (SQLException sql){
+                    JOptionPane.showMessageDialog(parent, "No se pudo generar la orden. ERROR: "+ sql.getMessage());
+                }catch(Exception exception){
+                    JOptionPane.showMessageDialog(parent, ""+exception.getMessage());
+                    return;
                 }
+                refresh();
+                limpiar();
+                JOptionPane.showMessageDialog(parent, "Orden generada con exito.");
+                setVisible(false);
             }
         });
 
@@ -317,6 +326,8 @@ public class AddProductView extends Dialog{
 
         add(main, BorderLayout.CENTER);
         add(action, BorderLayout.SOUTH);
+        refresh();
+        limpiar();
     }
 
     @Override
@@ -330,6 +341,17 @@ public class AddProductView extends Dialog{
         quitar.setEnabled(false);
         table.clearSelection();
         sumar();
+    }
+    private void limpiar(){
+        cliente = null;
+        glosa.clear();
+        id.setText("");
+        nombre.setText("");
+        run.setText("");
+        direccion.setText("");
+        telefono.setText("");
+        buscarCliente.setText("");
+
     }
     private void sumar(){
         int suma = 0;

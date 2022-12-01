@@ -21,7 +21,7 @@ public class ListClientsView extends Dialog {
     public ListClientsView(ListClientsController ctr){
         this(null, ctr);
     }
-    public ListClientsView(Frame parent, ListClientsController scController){
+    public ListClientsView(View parent, ListClientsController scController){
         super(parent, "Clientes");
         controller = scController;
         setSize(500, 300);

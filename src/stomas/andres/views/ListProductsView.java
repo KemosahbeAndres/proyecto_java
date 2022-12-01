@@ -9,9 +9,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.sql.SQLException;
 import java.util.Vector;
 
@@ -25,6 +23,13 @@ public class ListProductsView extends Dialog{
     private Vector<Vectorizable> productos;
     public ListProductsView(View parent, ListProductsController controller, SearchOrderController oController){
         super(parent, "Listar Productos");
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                refresh();
+            }
+        });
         this.controller = controller;
         this.orderController = oController;
         setDefaultCloseOperation(HIDE_ON_CLOSE);
@@ -35,9 +40,9 @@ public class ListProductsView extends Dialog{
         productos = new Vector<>();
 
         side = new JPanel();
-        side.setLayout(new GridLayout(2,1));
+        side.setLayout(new GridLayout(1,2));
         side.setBorder(new EmptyBorder(0,10,0,10));
-        side.setMinimumSize(new Dimension(200,400));
+        side.setMinimumSize(new Dimension(400,200));
 
         oPanel = new JPanel();
         oPanel.setLayout(new BoxLayout(oPanel, BoxLayout.Y_AXIS));
@@ -119,7 +124,7 @@ public class ListProductsView extends Dialog{
         side.add(oPanel);
         side.add(cPanel);
 
-        add(side, BorderLayout.EAST);
+        add(side, BorderLayout.SOUTH);
 
         table = new ProductItemTable();
         table.addMouseListener(new MouseAdapter() {
@@ -160,8 +165,6 @@ public class ListProductsView extends Dialog{
             }
         });
 
-        refresh();
-
         top = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
         buscar = table.getFilterField();
@@ -177,6 +180,7 @@ public class ListProductsView extends Dialog{
         top.add(refrescar);
         add(top, BorderLayout.NORTH);
         add(table.getScrollTable(), BorderLayout.CENTER);
+        refresh();
     }
 
     @Override

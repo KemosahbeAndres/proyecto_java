@@ -163,9 +163,4 @@ public class NewClientView extends Dialog{
         }
         return invertir_int;
     }
-
-    public static void main(String[] args) {
-        NewClientView view = new NewClientView(null, new NewClientController());
-        view.setVisible(true);
-    }
 }
