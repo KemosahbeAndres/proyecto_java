@@ -18,9 +18,11 @@ public class Producto implements Vectorizable{
         this(
                 (int) object.get(0),
                 (String) object.get(1),
-                (int) object.get(2),
-                (int) object.get(3)
+                object.get(2) instanceof Double ? ((Double) object.get(2)).intValue() : (int) object.get(2),
+                object.get(3) instanceof Double ? ((Double) object.get(3)).intValue() : (int) object.get(3)
         );
+
+
     }
 
     public int getId() {

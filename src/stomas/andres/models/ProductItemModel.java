@@ -1,9 +1,9 @@
 package stomas.andres.models;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import stomas.andres.entitys.Vectorizable;
+
+import java.sql.*;
+import java.time.Instant;
 import java.util.Vector;
 
 public class ProductItemModel {
@@ -23,7 +23,7 @@ public class ProductItemModel {
             producto.add(result.getInt("id"));
             producto.add(result.getString("nombre"));
             producto.add(result.getDouble("precio"));
-            producto.add(result.getDouble("stock"));
+            producto.add(result.getDouble("cantidad"));
             producto.add(result.getDouble("total"));
             producto.add(result.getInt("id_compras"));
 
@@ -33,4 +33,21 @@ public class ProductItemModel {
         connection.close();
         return productos;
     }
+    public void insert(Vectorizable object, int id) throws SQLException {
+        Vector<Object> vector = object.toVector();
+        connection = manager.getConnection();
+        String query = "INSERT INTO "+tabla+"(nombre, precio, cantidad, total, id_compras) VALUES (?,?,?,?,?)";
+        PreparedStatement statement = connection.prepareStatement(query);
+
+        statement.setString(1, (String) vector.get(1));
+        statement.setDouble(2, (double) vector.get(2));
+        statement.setDouble(3, (double) vector.get(3));
+        statement.setDouble(4, (double) vector.get(4));
+        statement.setInt(5, (int) vector.get(5));
+
+        statement.execute();
+
+        connection.close();
+    }
+
 }

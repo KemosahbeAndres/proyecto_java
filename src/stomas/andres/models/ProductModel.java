@@ -2,10 +2,8 @@ package stomas.andres.models;
 
 import stomas.andres.entitys.Vectorizable;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.time.Instant;
 import java.util.Vector;
 
 public class ProductModel {
@@ -48,6 +46,21 @@ public class ProductModel {
         connection.close();
         return vector;
     }
+    public Vector<Object> searchByID(int id) throws SQLException {
+        Vector<Object> vector = new Vector<>();
+        connection = manager.getConnection();
+        Statement st = connection.createStatement();
+        ResultSet result = st.executeQuery("SELECT * FROM "+tabla+" WHERE id = "+id+" LIMIT 1;");
+        while(result.next()){
+            vector.add(result.getInt("id"));
+            vector.add(result.getString("nombre"));
+            vector.add(result.getInt("precio"));
+            vector.add(result.getInt("stock"));
+        }
+        result.close();
+        connection.close();
+        return vector;
+    }
     public int count(String name) throws SQLException{
         int cantidad = 0;
         connection = manager.getConnection();
@@ -59,5 +72,23 @@ public class ProductModel {
         result.close();
         connection.close();
         return cantidad;
+    }
+    public void updateStock(Vectorizable object) throws SQLException {
+        Vector<Object> vector = object.toVector(); //ProductoCompra
+        int vID = (int) vector.get(0);
+        System.out.println("ID ProductoCompra: "+ vID);
+        Vector<Object> founded = searchByID(vID); //ProductoBase
+        int id = (int) founded.get(0);
+        int stock = (int) founded.get(3);
+        int cantidad = ((Double)vector.get(3)).intValue();
+        connection = manager.getConnection();
+        String query = "UPDATE "+tabla+" SET stock = ? WHERE id = "+id;
+        PreparedStatement statement = connection.prepareStatement(query);
+
+        statement.setInt(1, stock-cantidad);
+
+        statement.execute();
+
+        connection.close();
     }
 }

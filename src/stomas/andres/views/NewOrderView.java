@@ -42,17 +42,17 @@ public class NewOrderView extends Dialog{
                 setVisible(false);
             }
         });
-        guardar = new JButton("Guardar");
+        guardar = new JButton("Guardar");/*
         guardar.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    controller.execute(new Orden(1, 50, 2022, 1, 220.5, Timestamp.from(Instant.now()) ));
+                    //controller.execute(new Orden(1, 50, 2022, 1, 220.5, Timestamp.from(Instant.now()) ));
                 }catch(SQLException ex){
                     JOptionPane.showMessageDialog(null, "SQL Error: "+ex.getMessage() );
                 }
             }
-        });
+        });*/
 
         action.add(cancelar);
         action.add(guardar);

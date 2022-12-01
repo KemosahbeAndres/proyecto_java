@@ -33,6 +33,47 @@ public class ClientModel {
         connection.close();
         return clientes;
     }
+    public Vector<Object> searchByName(String name) throws SQLException {
+        Vector<Object> vector = new Vector<>();
+        connection = manager.getConnection();
+        Statement st = connection.createStatement();
+        ResultSet result = st.executeQuery("SELECT * FROM "+tabla+" WHERE nombre LIKE '%"+name.trim()+"%' LIMIT 1;");
+        while(result.next()){
+            vector.add(result.getInt("id"));
+            vector.add(result.getString("nombre"));
+            vector.add(result.getInt("telefono"));
+            vector.add(result.getString("direccion"));
+            vector.add(result.getString("run"));
+            vector.add(result.getTimestamp("fecha_cliente"));
+        }
+        result.close();
+        connection.close();
+        return vector;
+    }
+    public int count(String name) throws SQLException{
+        int cantidad = 0;
+        connection = manager.getConnection();
+        Statement st = connection.createStatement();
+        ResultSet result = st.executeQuery("SELECT COUNT(*) FROM "+tabla+" WHERE nombre LIKE '%"+name.trim()+"%';");
+        while(result.next()){
+            cantidad = (int) result.getInt(1);
+        }
+        result.close();
+        connection.close();
+        return cantidad;
+    }
+    public int countAll() throws SQLException{
+        int cantidad = 0;
+        connection = manager.getConnection();
+        Statement st = connection.createStatement();
+        ResultSet result = st.executeQuery("SELECT COUNT(*) FROM "+tabla+";");
+        while(result.next()){
+            cantidad = (int) result.getInt(1);
+        }
+        result.close();
+        connection.close();
+        return cantidad;
+    }
 
     public void insert(Vectorizable object) throws SQLException {
         Vector<Object> vector = object.toVector();

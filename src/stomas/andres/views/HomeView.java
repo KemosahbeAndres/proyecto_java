@@ -37,9 +37,13 @@ public class HomeView extends View {
         controller = loController;
         listClientsView = new ListClientsView(this, new ListClientsController(new ClientModel()));
         newClientView = new NewClientView(this, new NewClientController());
-        addProductView = new AddProductView(this, new SearchProductController(new ProductModel()));
-        listProductsView = new ListProductsView(this, new ListProductsController(new ProductModel(), new ProductItemModel()));
-        newOrderView = new NewOrderView(this, new NewOrderController(new OrderModel()));
+        addProductView = new AddProductView(this,
+                new SearchProductController(new ProductModel()),
+                new SearchClientController(new ClientModel()),
+                new NewOrderController(new OrderModel(), new ProductModel(), new ProductItemModel())
+        );
+        listProductsView = new ListProductsView(this, new ListProductsController(new ProductItemModel(), new OrderModel()));
+        newOrderView = new NewOrderView(this, new NewOrderController(new OrderModel(), new ProductModel(), new ProductItemModel()));
 
         setSize(600,300);
         setResizable(false);

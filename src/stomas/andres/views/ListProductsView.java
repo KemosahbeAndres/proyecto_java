@@ -12,7 +12,7 @@ import java.sql.SQLException;
 public class ListProductsView extends Dialog{
     private ListProductsController controller;
     private ProductTable table;
-    public ListProductsView(Frame parent, ListProductsController controller){
+    public ListProductsView(View parent, ListProductsController controller){
         super(parent, "Listar Productos");
         this.controller = controller;
         setDefaultCloseOperation(HIDE_ON_CLOSE);
