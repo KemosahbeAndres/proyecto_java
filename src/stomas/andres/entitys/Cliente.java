@@ -7,7 +7,7 @@ public class Cliente implements Vectorizable{
     private int id, telefono;
     private String nombre, run, direccion;
     private Timestamp fecha;
-    public Cliente(int id, String nombre, int telefono, String direccion, String run, Timestamp fecha) {
+    public Cliente(int id, String nombre, String run, String direccion,int telefono, Timestamp fecha) {
         setId(id);
         setNombre(nombre);
         setTelefono(telefono);
@@ -19,9 +19,9 @@ public class Cliente implements Vectorizable{
         this(
                 (int) object.get(0),
                 (String) object.get(1),
-                (int) object.get(2),
+                (String) object.get(2),
                 (String) object.get(3),
-                (String) object.get(4),
+                (int) object.get(4),
                 (Timestamp) object.get(5)
         );
     }
@@ -84,9 +84,9 @@ public class Cliente implements Vectorizable{
         Vector<Object> vector = new Vector<>();
         vector.add(id);
         vector.add(nombre);
-        vector.add(telefono);
-        vector.add(direccion);
         vector.add(run);
+        vector.add(direccion);
+        vector.add(telefono);
         vector.add(fecha);
         return vector;
     }

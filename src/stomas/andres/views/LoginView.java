@@ -107,15 +107,21 @@ public class LoginView extends Dialog {
             public void actionPerformed(ActionEvent e) {
                 //controller.tryLogin(userField.getText(), passwordField.getText());
                 System.out.println("Intento de login");
+                String user = userField.getText().trim();
+                String pass = passwordField.getText().trim();
                 try {
-                    if(controller.execute(userField.getText(), passwordField.getText())){
+                    if(user.isBlank() || pass.isBlank()) throw new Exception("Hay campos vacios.");
+                    if(controller.execute(user, pass)){
                         ((HomeView) parent).renderContent();
                         setVisible(false);
                     }else{
-                        JOptionPane.showMessageDialog(parent, "Intenta de nuevo, datos incorrectos.");
+                        throw new Exception("Intenta de nuevo, el usuario y contraseña no coinciden.");
                     }
                 } catch (SQLException ex) {
                     JOptionPane.showMessageDialog(parent, "Error Login: "+ex.getMessage());
+                }catch(Exception exception){
+                    JOptionPane.showMessageDialog(parent, "Error: "+ exception.getMessage());
+                    refresh();
                 }
 
             }

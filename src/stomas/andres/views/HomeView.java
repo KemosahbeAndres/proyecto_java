@@ -19,7 +19,6 @@ public class HomeView extends View {
     private NewClientView newClientView;
     private AddProductView addProductView;
     private ListProductsView listProductsView;
-    private NewOrderView newOrderView;
     private LoginController loginController;
     private RegisterController registerController;
     private ListOrdersController controller;
@@ -105,6 +104,7 @@ public class HomeView extends View {
         mProductos.add(iAddProduct);
         mProductos.add(iListProducts);
 
+        /*
         mOrdenes = new JMenu("Compras");
         iAddOrder = new JMenuItem("Generar Orden");
         iAddOrder.addActionListener(new AbstractAction() {
@@ -114,12 +114,14 @@ public class HomeView extends View {
             }
         });
 
+
         mOrdenes.add(iAddOrder);
 
         mUsuarios = new JMenu("Usuarios");
         iAddUser = new JMenuItem("Agregar Usuario");
 
         mUsuarios.add(iAddUser);
+        */
 
         mainBar.add(mClientes);
         mainBar.add(mProductos);

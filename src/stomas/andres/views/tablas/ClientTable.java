@@ -7,7 +7,8 @@ import java.util.Vector;
 
 public class ClientTable extends DefaultTable{
     public ClientTable(){
-        super(new String[]{"ID","Nombre", "Run", "Direccion", "Correo"});
+        super(new String[]{"ID","Nombre", "Run", "Direccion", "Telefono"});
+
     }
 
 

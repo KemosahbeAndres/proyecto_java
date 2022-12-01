@@ -15,7 +15,9 @@ import java.util.Vector;
 
 public abstract class DefaultTable extends JTable {
     private Vector<String> columnas;
+    private JTextField textField;
     public DefaultTable(){
+        textField = new JTextField(14);
         columnas = new Vector<>();
         setCellSelectionEnabled(false);
         setColumnSelectionAllowed(false);
@@ -85,7 +87,6 @@ public abstract class DefaultTable extends JTable {
             this.setAutoCreateRowSorter(true);
             rowSorter = this.getRowSorter();
         }
-        JTextField textField = new JTextField(14);
         TableRowSorter<? extends TableModel> trSorter = (TableRowSorter<? extends TableModel>) rowSorter;
         textField.getDocument().addDocumentListener(new DocumentAdapter() {
             @Override
@@ -94,6 +95,7 @@ public abstract class DefaultTable extends JTable {
                 if(texto.trim().length() != 0){
                     trSorter.setRowFilter(RowFilter.regexFilter("(?i)" + texto));
                 }else{
+                    //System.out.println("Busqueda desactivada");
                     trSorter.setRowFilter(null);
                 }
             }

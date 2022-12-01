@@ -3,6 +3,7 @@ package stomas.andres.views;
 import stomas.andres.controllers.NewClientController;
 import stomas.andres.entitys.Cliente;
 
+import javax.print.attribute.standard.JobKOctetsProcessed;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -83,20 +84,23 @@ public class NewClientView extends Dialog{
         guardar.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String name = nombre.getText();
+                String phone = telefono.getText();
+                String address = direccion.getText();
+                String elrun = run.getText();
                 try{
-                    controller.execute(new Cliente(
-                            0,
-                            nombre.getText(),
-                            Integer.parseInt(telefono.getText()),
-                            direccion.getText(),
-                            run.getText(),
-                            Timestamp.from(Instant.now())
-                    ));
+                    if(name.isBlank() || phone.isBlank() || address.isBlank() || elrun.isBlank()) throw new Exception("No puede haber campos vacios");
+                    if(!rutValido(run.getText())) throw new Exception("El run no es valido, o el formato es incorrecto.");
+                    if(phone.length() > 8) throw new Exception("El formato del telefono es incorrecto.");
+                    controller.execute(new Cliente(0, name, elrun, address, Integer.parseInt(phone), Timestamp.from(Instant.now())));
+                    JOptionPane.showMessageDialog(parent, "Cliente agregado con exito");
                     setVisible(false);
                 }catch (SQLException ex){
-                    JOptionPane.showMessageDialog(null, "Error SQL: "+ ex.getMessage());
+                    JOptionPane.showMessageDialog(parent, "Error SQL: "+ ex.getMessage());
+                }catch(NumberFormatException nfe){
+                    JOptionPane.showMessageDialog(parent, "El telefono debe ser un numero de 8 digitos");
                 }catch(Exception exception){
-                    JOptionPane.showMessageDialog(null, "Datos incorrectos: "+exception.getMessage());
+                    JOptionPane.showMessageDialog(parent, "Datos incorrectos: "+exception.getMessage());
                 }
 
             }
@@ -115,6 +119,49 @@ public class NewClientView extends Dialog{
         direccion.setText("");
         run.setText("");
         telefono.setText("");
+    }
+    private boolean rutValido(String run){
+        if(run.trim().split("-").length > 2) return false;
+        String rut = run.trim().split("-")[0].trim();
+        String dv = run.trim().split("-")[1].trim();
+        String[] rutArray = new String[rut.length()];
+        int j = 0;
+        for (char c: rut.toCharArray()){
+            rutArray[j] = String.valueOf(c);
+            j++;
+        }
+        Object[] array = invertir(rutArray);
+        int a = 2;
+        int rutSumado = 0;
+        for (int i = 0; i < array.length; i++) {
+            array[i] = Integer.parseInt((String) array[i]) * a;
+            rutSumado += Integer.parseInt(String.valueOf(array[i]));
+            if (a == 7) {
+                a = 1;
+            }
+            a++;
+        }
+        int resto = rutSumado % 11;
+        String Digito = String.valueOf(11 - resto);
+        if (Digito.equals("11")) {
+            Digito = "0";
+        }
+        if (Digito.equals("10")) {
+            Digito = "K";
+        }
+        if(Digito.equals(dv)) return true;
+        return false;
+    }
+    private static Object[] invertir(String[] array) {
+        Object[] invertir_int = new Object[array.length];
+        int maximo = array.length;
+
+        for (int i = 0; i < array.length; i++) {
+            Object j = array[maximo - 1];
+            invertir_int[maximo - 1] = array[i];
+            maximo--;
+        }
+        return invertir_int;
     }
 
     public static void main(String[] args) {

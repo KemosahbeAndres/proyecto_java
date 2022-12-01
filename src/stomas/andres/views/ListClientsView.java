@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,14 +36,22 @@ public class ListClientsView extends Dialog {
         lista.add(new ArrayList<>(Arrays.asList(new Object[]{"Pedro", "8.435.678-2", "Avenida sIEMPRE VIVA", "p.rebolledo@ribd.cl"})));
 
         table.inserData(lista);*/
-        refresh();
 
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
         panel.add(new JLabel("Buscar"));
         text = table.getFilterField();
-
         panel.add(text);
+
+        JButton refrescar = new JButton("Refrescar");
+        refrescar.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                refresh();
+            }
+        });
+        panel.add(refrescar);
+        refresh();
 
         add(panel, BorderLayout.NORTH);
         add(table.getScrollTable(), BorderLayout.CENTER);
@@ -54,6 +63,7 @@ public class ListClientsView extends Dialog {
         try{
             table.inserData(controller.execute());
             text = table.getFilterField();
+            text.setText("");
         }catch (SQLException e){
             JOptionPane.showMessageDialog(this, "Error SQL: "+e.getMessage());
         }

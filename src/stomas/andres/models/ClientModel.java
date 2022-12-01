@@ -22,9 +22,9 @@ public class ClientModel {
             Vector<Object> cliente = new Vector<>();
             cliente.add(result.getInt("id"));
             cliente.add(result.getString("nombre"));
-            cliente.add(result.getInt("telefono"));
-            cliente.add(result.getString("direccion"));
             cliente.add(result.getString("run"));
+            cliente.add(result.getString("direccion"));
+            cliente.add(result.getInt("telefono"));
             cliente.add(result.getTimestamp("fecha_cliente"));
 
             clientes.add(cliente);
@@ -41,9 +41,9 @@ public class ClientModel {
         while(result.next()){
             vector.add(result.getInt("id"));
             vector.add(result.getString("nombre"));
-            vector.add(result.getInt("telefono"));
-            vector.add(result.getString("direccion"));
             vector.add(result.getString("run"));
+            vector.add(result.getString("direccion"));
+            vector.add(result.getInt("telefono"));
             vector.add(result.getTimestamp("fecha_cliente"));
         }
         result.close();
@@ -58,9 +58,9 @@ public class ClientModel {
         while(result.next()){
             vector.add(result.getInt("id"));
             vector.add(result.getString("nombre"));
-            vector.add(result.getInt("telefono"));
-            vector.add(result.getString("direccion"));
             vector.add(result.getString("run"));
+            vector.add(result.getString("direccion"));
+            vector.add(result.getInt("telefono"));
             vector.add(result.getTimestamp("fecha_cliente"));
         }
         result.close();
@@ -95,13 +95,13 @@ public class ClientModel {
     public void insert(Vectorizable object) throws SQLException {
         Vector<Object> vector = object.toVector();
         connection = manager.getConnection();
-        String query = "INSERT INTO "+tabla+"(nombre, telefono, direccion, run, fecha_cliente) VALUES (?,?,?,?,?)";
+        String query = "INSERT INTO "+tabla+"(nombre, run, direccion, telefono, fecha_cliente) VALUES (?,?,?,?,?)";
         PreparedStatement statement = connection.prepareStatement(query);
 
         statement.setString(1, (String) vector.get(1));
-        statement.setInt(2, (int) vector.get(2));
+        statement.setString(2, (String) vector.get(2));
         statement.setString(3, (String) vector.get(3));
-        statement.setString(4, (String) vector.get(4));
+        statement.setInt(4, (int) vector.get(4));
         statement.setTimestamp(5, (Timestamp) Timestamp.from(Instant.now()));
 
         statement.execute();
