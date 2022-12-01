@@ -86,12 +86,13 @@ public class RegisterView extends Dialog {
                 String usuario = user_tf.getText();
                 String clave = pass_tf.getText();
                 String repetir = repeat_tf.getText();
-                if(!usuario.isEmpty()
-                && !clave.isEmpty()
-                && !repetir.isEmpty()){
+                if(!usuario.isBlank()
+                && !clave.isBlank()
+                && !repetir.isBlank()){
                     try{
                         if(clave.equals(repetir)){
-                            rController.execute(user_tf.getText(), pass_tf.getText());
+                            if(usuario.trim().length() > 255) throw new Exception("");
+                            rController.execute(usuario, clave);
                             JOptionPane.showMessageDialog(parent, "Usuario guardado con exito", "Exito", JOptionPane.INFORMATION_MESSAGE);
                             setVisible(false);
                         }else{

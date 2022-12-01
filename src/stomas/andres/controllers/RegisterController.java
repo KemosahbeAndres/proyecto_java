@@ -18,7 +18,7 @@ public class RegisterController {
         Vector<Vector<Object>> usuarios = model.selectAll();
         for(Vector<Object> v: usuarios){
             if(((String)v.get(2)).equals(contraseña)){
-                throw new Exception("Contraseña repetida");
+                throw new Exception("La contraseña ya existe en el sistema, ingresa otra.");
             }
         }
         model.insert(new Usuario(

@@ -41,7 +41,7 @@ public class AddProductView extends Dialog{
         this.clientController = cController;
         this.orderController = oController;
         setDefaultCloseOperation(HIDE_ON_CLOSE);
-        setSize(700,500);
+        setSize(700,540);
         setResizable(false);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
@@ -80,7 +80,7 @@ public class AddProductView extends Dialog{
         });
         JPanel datos = new JPanel();
         datos.setLayout(new BoxLayout(datos, BoxLayout.Y_AXIS));
-        datos.setBorder(new EmptyBorder(0,20,0,50));
+        datos.setBorder(new EmptyBorder(0,20,0,20));
 
         id = new JLabel("");
         nombre = new JLabel("");

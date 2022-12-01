@@ -148,7 +148,7 @@ public class HomeView extends View {
         List<List<Object>> compras = new ArrayList<List<Object>>();
         compras.add(new ArrayList<>(Arrays.asList(new Object[]{0, 100, 2022, "Andres", 20.20, "Hoy" })));
         compras.add(new ArrayList<>(Arrays.asList(new Object[]{1, 300, 2021, "PEPE", 50.00, "Hoy" })));
-*/
+
         try{
             ordenes.inserData(controller.execute());
         }catch (SQLException e){
@@ -163,6 +163,8 @@ public class HomeView extends View {
         main.add(line);
 
         main.add(ordenes.getScrollTable());
+*/
+        main.add(new JLabel("Bienvenido"));
         add(main, BorderLayout.CENTER);
     }
     @Override
