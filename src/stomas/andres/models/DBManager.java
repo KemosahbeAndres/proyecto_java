@@ -10,13 +10,9 @@ public class DBManager {
     private static final String clave = "";
     private DBManager(){}
 
-    public Connection getConnection(){
+    public Connection getConnection() throws SQLException{
         Connection conn = null;
-        try{
-            conn = DriverManager.getConnection(db, usuario, clave);
-        }catch(Exception e){
-            System.out.println("Error de conexion.");
-        }
+        conn = DriverManager.getConnection(db, usuario, clave);
         return conn;
     }
 

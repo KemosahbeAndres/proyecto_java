@@ -131,7 +131,7 @@ public class ListProductsView extends Dialog{
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                int index = table.getSelectedRow();
+                int index = table.getRowSorter().convertRowIndexToModel(table.getSelectedRow());
                 System.out.println("Indice seleccionado: "+ index);
                 if(index >= 0){
                     ProductoCompra p = new ProductoCompra(productos.get(index).toVector());

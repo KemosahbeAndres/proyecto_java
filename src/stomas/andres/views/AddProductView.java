@@ -62,6 +62,7 @@ public class AddProductView extends Dialog{
             public void actionPerformed(ActionEvent e) {
                 String texto = buscarCliente.getText().trim();
                 try{
+                    if(texto.length() > 255) throw new Exception("Excede el maximo de caracteres");
                     if(clientController.existencias() > 0 && texto.length() > 0){
                         cliente = clientController.search(texto);
                         id.setText(String.valueOf(cliente.getId()));
@@ -73,7 +74,9 @@ public class AddProductView extends Dialog{
                         JOptionPane.showMessageDialog(parent, "No existen clientes, debes ingresar al menos 1 cliente.");
                     }
                 }catch (SQLException sql){
-                    System.out.println(sql.getMessage());
+                    JOptionPane.showMessageDialog(parent, sql.getMessage());
+                }catch (Exception ex){
+                    JOptionPane.showMessageDialog(parent, ex.getMessage());
                 }
                 refresh();
             }
@@ -138,6 +141,7 @@ public class AddProductView extends Dialog{
             public void changed(DocumentEvent e) {
                 String texto = buscar.getText().trim().toLowerCase();
                 try{
+                    if(texto.length() > 255) throw new Exception("Excede el maximo de caracteres");
                     if(texto.length() > 0) {
                         coincidencias.setText(String.valueOf(controller.existencias(texto)));
                     }else{
@@ -146,6 +150,8 @@ public class AddProductView extends Dialog{
                 }catch(SQLException sql){
                     System.out.println(sql.getMessage());
                     coincidencias.setText("");
+                }catch (Exception ex){
+                    JOptionPane.showMessageDialog(parent, ex.getMessage());
                 }
             }
         });
@@ -167,6 +173,7 @@ public class AddProductView extends Dialog{
                 String texto = buscar.getText().trim().toLowerCase();
                 if(texto.length()>0) {
                     try {
+                        if(texto.length() > 255) throw new Exception("Excede el maximo de caracteres");
                         if(controller.existencias(texto) > 0) {
                             Producto producto = controller.search(texto);
                             int st = producto.getStock();
@@ -180,10 +187,9 @@ public class AddProductView extends Dialog{
                             refresh();
                         }
                     } catch (SQLException sql) {
-                        System.out.println(sql.getMessage());
+                        JOptionPane.showMessageDialog(parent, sql.getMessage());
                     } catch (Exception ex) {
-                        System.out.println(ex.getMessage());
-                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(parent,ex.getMessage());
                     }
 
                 }

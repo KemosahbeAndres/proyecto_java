@@ -74,6 +74,7 @@ public class RegisterView extends Dialog {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Cancelando...");
                 setVisible(false);
+                refresh();
             }
         });
         guardar_btn = new JButton("Guardar");
@@ -90,6 +91,9 @@ public class RegisterView extends Dialog {
                 && !clave.isBlank()
                 && !repetir.isBlank()){
                     try{
+                        if(usuario.length() > 255) throw new Exception("Excede el maximo de caracteres");
+                        if(clave.length() > 255) throw new Exception("Excede el maximo de caracteres");
+                        if(repetir.length() > 255) throw new Exception("Excede el maximo de caracteres");
                         if(clave.equals(repetir)){
                             if(usuario.trim().length() > 255) throw new Exception("");
                             rController.execute(usuario, clave);
@@ -115,6 +119,13 @@ public class RegisterView extends Dialog {
         main_panel.add(action_panel);
 
         add(main_panel);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                refresh();
+            }
+        });
         //setVisible(true);
     }
 

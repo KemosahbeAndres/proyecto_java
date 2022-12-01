@@ -111,6 +111,8 @@ public class LoginView extends Dialog {
                 String pass = passwordField.getText().trim();
                 try {
                     if(user.isBlank() || pass.isBlank()) throw new Exception("Hay campos vacios.");
+                    if(user.length() > 255) throw new Exception("Excede el maximo de caracteres");
+                    if(pass.length() > 255) throw new Exception("Excede el maximo de caracteres");
                     if(controller.execute(user, pass)){
                         ((HomeView) parent).renderContent();
                         setVisible(false);
@@ -118,7 +120,7 @@ public class LoginView extends Dialog {
                         throw new Exception("Intenta de nuevo, el usuario y contraseña no coinciden.");
                     }
                 } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(parent, "Error Login: "+ex.getMessage());
+                    JOptionPane.showMessageDialog(parent, "Error de comunicacion con base de datos. No se puede conectar a la Base de Datos.");
                 }catch(Exception exception){
                     JOptionPane.showMessageDialog(parent, "Error: "+ exception.getMessage());
                     refresh();
