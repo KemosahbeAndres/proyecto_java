@@ -43,7 +43,7 @@ public class ProductItemModel {
         statement.setDouble(2, (double) vector.get(2));
         statement.setDouble(3, (double) vector.get(3));
         statement.setDouble(4, (double) vector.get(4));
-        statement.setInt(5, (int) vector.get(5));
+        statement.setInt(5, id);
 
         statement.execute();
 

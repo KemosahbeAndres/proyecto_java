@@ -67,6 +67,23 @@ public class OrderModel {
         connection.close();
         return vector;
     }
+    public Vector<Object> searchByID(int id) throws SQLException {
+        Vector<Object> vector = new Vector<>();
+        connection = manager.getConnection();
+        Statement st = connection.createStatement();
+        ResultSet result = st.executeQuery("SELECT * FROM "+tabla+" WHERE id = "+id+" LIMIT 1;");
+        while(result.next()){
+            vector.add(result.getInt("id"));
+            vector.add(result.getInt("numero"));
+            vector.add(result.getInt("year"));
+            vector.add(result.getInt("id_clientes"));
+            vector.add(result.getDouble("monto"));
+            vector.add(result.getTimestamp("fecha_compra"));
+        }
+        result.close();
+        connection.close();
+        return vector;
+    }
     public int count(String name) throws SQLException{
         int cantidad = 0;
         connection = manager.getConnection();
