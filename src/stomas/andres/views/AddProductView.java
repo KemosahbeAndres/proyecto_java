@@ -13,6 +13,8 @@ import stomas.andres.views.tablas.ProductItemTable;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.text.NumberFormatter;
 import java.awt.*;
@@ -223,7 +225,7 @@ public class AddProductView extends Dialog{
         busqueda.add(prod);
         busqueda.add(new JLabel("Cantidad"));
         cantidad.setHorizontalAlignment(SwingConstants.CENTER);
-        cantidad.setEditable(false);
+        //cantidad.setEditable(false);
         busqueda.add(cantidad);
         JPanel controles = new JPanel();
         controles.setLayout(new GridLayout(2,1));

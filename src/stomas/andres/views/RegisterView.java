@@ -91,6 +91,7 @@ public class RegisterView extends Dialog {
                 && !clave.isBlank()
                 && !repetir.isBlank()){
                     try{
+                        if(hasNumber(usuario)) throw new Exception("El usuario no puede tener numeros.");
                         if(usuario.length() > 255) throw new Exception("Excede el maximo de caracteres");
                         if(clave.length() > 255) throw new Exception("Excede el maximo de caracteres");
                         if(repetir.length() > 255) throw new Exception("Excede el maximo de caracteres");
@@ -127,6 +128,20 @@ public class RegisterView extends Dialog {
             }
         });
         //setVisible(true);
+    }
+
+    private boolean hasNumber(String text){
+        char[] array = text.trim().toCharArray();
+        boolean flag = true;
+        for(char c: array){
+            try{
+                int n = Integer.parseInt(String.valueOf(c));
+                flag = true;
+            }catch (Exception e){
+                flag = false;
+            }
+        }
+        return flag;
     }
 
     @Override

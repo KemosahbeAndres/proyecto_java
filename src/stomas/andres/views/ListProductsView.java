@@ -126,7 +126,7 @@ public class ListProductsView extends Dialog{
 
         add(side, BorderLayout.SOUTH);
 
-        table = new ProductItemTable();
+        table = new ProductItemTable(true);
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

@@ -110,6 +110,7 @@ public class LoginView extends Dialog {
                 String user = userField.getText().trim();
                 String pass = passwordField.getText().trim();
                 try {
+                    if(hasNumber(user)) throw new Exception("El usuario no puede tener numeros.");
                     if(user.isBlank() || pass.isBlank()) throw new Exception("Hay campos vacios.");
                     if(user.length() > 255) throw new Exception("Excede el maximo de caracteres");
                     if(pass.length() > 255) throw new Exception("Excede el maximo de caracteres");
@@ -156,6 +157,19 @@ public class LoginView extends Dialog {
                 System.out.println("Width: "+e.getComponent().getWidth()+ " Height: " +e.getComponent().getHeight());
             }
         });*/
+    }
+    private boolean hasNumber(String text){
+        char[] array = text.trim().toCharArray();
+        boolean flag = true;
+        for(char c: array){
+            try{
+                int n = Integer.parseInt(String.valueOf(c));
+                flag = true;
+            }catch (Exception e){
+                flag = false;
+            }
+        }
+        return flag;
     }
 
     @Override
